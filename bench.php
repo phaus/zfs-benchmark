@@ -21,6 +21,7 @@ $LSPCI="lspci";
 $DD_READ="(time sh -c \"dd if=/tank/tmp of=/dev/null bs=4k\") ";
 $DD_WRITE="(time sh -c \"dd if=/dev/zero of=/tank/tmp bs=4k count=".$SIZE_B_AS_4k." && sync\") ";
 $BOONIE="/usr/sbin/bonnie++ -d /tank -r ".$SIZE_MB." -u root";
+$BON_CSV2HTML = "/usr/bin/bon_csv2html";
 
 $ZPOOL = "/sbin/zpool";
 $ZFS = "/sbin/zfs";
@@ -76,7 +77,11 @@ $ZPOOL_LOG = array(
 	"4.4" => "add -f tank log /dev/sdd"
 );
 
-global $ZPOOL, $ZPOOL_CREATE_CMDS, $ZPOOL_CACHE, $ZPOOL_LOG;
+##############################################
+#
+#	Config End
+#
+##############################################
 
 exec("mkdir -p bench");
 $indexFile = fopen("bench/index.html", "w") or die("Unable to open index file!");
@@ -89,14 +94,8 @@ runCmd($UNAME, $indexFile);
 runCmd($FREE, $indexFile);
 runCmd($DISK_INDEX_CMD, $indexFile);
 
-exec("mkdir -p bench/sys");
-$sysFile = fopen("bench/sys/system.html", "w") or die("Unable to open system file!");
-addSubHeader($sysFile, "System");
-runCmd($DMESG, $sysFile);
-runCmd($CPUINFO, $sysFile);
-runCmd($LSPCI, $sysFile);
-addSubFooter($sysFile);
-fclose($sysFile);
+addSystemFile();
+
 fwrite($indexFile, "<p><a href=\"sys/system.html\">...more</a></p>\n");
 fwrite($indexFile, "<p><kbd>Test Size</kbd><br /><samp>".$SIZE_GB." GB</samp></p>\n");
 closeChapter($indexFile);
@@ -110,9 +109,10 @@ foreach ($ZPOOL_CREATE_CMDS as $key => $cmd) {
 	exec("mkdir -p bench/".$key);
 	$poolCmds = "";
 	$benchFile = fopen("bench/".$key."/result.html", "w") or die("Unable to open ".$key." file!");
-	addSubHeader($benchFile, $key);
+	$nav = array("Details", "Pool Setup", "DD", "Boonie", "Cleanup");
+	addSubHeader($benchFile, $key, $nav);
 
-	openChapter($benchFile, $key, "Benchmark Details");
+	openChapter($benchFile, $key, "Details");
 	runCmd("echo \"init \" && date", $benchFile);
 	closeChapter($benchFile);
 
@@ -132,14 +132,9 @@ foreach ($ZPOOL_CREATE_CMDS as $key => $cmd) {
 	runCmd($ZFS." ".$ZFS_LIST, $benchFile);		
 	closeChapter($benchFile);
 
-	openChapter($benchFile, $key, "Boonie Benchmark");
-	runCmd("echo \"start \" && date", $benchFile);	
-	runCmd($TOP, $benchFile);
-	runCmd($BOONIE, $benchFile);
-	runCmd($TOP, $benchFile);
-	runCmd("echo \"end \" && date", $benchFile);
-	closeChapter($benchFile);
-	openChapter($benchFile, $key, "DD Benchmark");
+	runBoonie($benchFile, $key);
+
+	openChapter($benchFile, $key, "DD");
 	runCmd("echo \"start \" && date", $benchFile);
 	runCmd($TOP, $benchFile);
 	runCmd($DD_WRITE, $benchFile);
@@ -170,6 +165,26 @@ closeChapter($indexFile);
 addFooter($indexFile);
 fclose($indexFile);
 
+
+function runBoonie($benchFile, $key) {
+	global $TOP, $BOONIE, $BON_CSV2HTML;
+	
+	openChapter($benchFile, $key, "Boonie");
+	runCmd("echo \"start \" && date", $benchFile);	
+	runCmd($TOP, $benchFile);
+
+	fwrite($benchFile, "<p class=\"cmd\">\n");
+	$cmd = $BOONIE." >> bench/".$key."/boonie.csv";
+	$output = shell_exec($cmd." 2>&1");
+	fwrite($benchFile, "<kbd>".$cmd."</kbd>\n<br />\n");
+	$cmd = $BON_CSV2HTML." bench/".$key."/boonie.csv > bench/".$key."/boonie.html";
+	$output = shell_exec($cmd." 2>&1");
+	fwrite($benchFile, "<kbd>".$cmd."</kbd>\n<br />\n");
+
+	runCmd($TOP, $benchFile);
+	runCmd("echo \"end \" && date", $benchFile);
+	closeChapter($benchFile);
+}
 
 function runCmd($cmd, $benchFile) {
 	$output = shell_exec($cmd." 2>&1");
@@ -205,7 +220,7 @@ function addFooter($benchFile) {
 	fwrite($benchFile, "\n</body>\n</html>\n");
 }
 
-function addSubHeader($benchFile, $key) {
+function addSubHeader($benchFile, $key, $nav) {
 	fwrite($benchFile, "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<title>Benchmark ".$key."</title>\n");
 	fwrite($benchFile, "\n<!-- Latest compiled and minified CSS -->\n");
 	fwrite($benchFile, "<link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css\" integrity=\"sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7\" crossorigin=\"anonymous\">\n");
@@ -224,6 +239,13 @@ function addSubHeader($benchFile, $key) {
 	        fwrite($benchFile, "back to Index\n");
 	      fwrite($benchFile, "</a>\n");
 	    fwrite($benchFile, "</div>\n");
+	    fwrite($benchFile, "<div class=\"collapse navbar-collapse\">\n");
+		  fwrite($benchFile, "<ul class=\"nav navbar-nav\">\n");
+		  foreach ($nav as $entry) {
+		  	fwrite($benchFile, "<li><a href=\"#".getAnchor($key, $entry)."\">".$entry."</a></li>\n"); 
+		  }	    
+		  fwrite($benchFile, "</ul>\n");      
+	    fwrite($benchFile, "</div>\n");      
 	  fwrite($benchFile, "</div>\n");
 	fwrite($benchFile, "</nav>\n");
 	fwrite($benchFile, "<div class=\"container\">\n");
@@ -245,12 +267,16 @@ function addSubFooter($benchFile) {
 }
 
 function openChapter($benchFile, $key, $name) {
-	$anchor = strtolower(str_replace(" ", "_",$key." ".$name));
+	$anchor = getAnchor($key, $name);
 	fwrite($benchFile, "<a class=\"anchor\" aria-hidden=\"true\" id=\"".$anchor."\"></a><h2><small><a href=\"#".$anchor."\">#</a></small>".$name."</h2>\n");
 }
 
 function closeChapter($benchFile) {
 
+}
+
+function getAnchor($key, $name) {
+	return strtolower(str_replace(" ", "_",$key." ".$name));
 }
 
 function addIndexLink($indexFile, $title, $poolCmds, $file) {
@@ -286,4 +312,25 @@ function createTestMatrix($indexFile) {
 	fwrite($indexFile, "</table>\n");
 }
 
+function addSystemFile() {
+	global $DMESG, $CPUINFO, $LSPCI;
+	exec("mkdir -p bench/sys");
+	$sysFile = fopen("bench/sys/system.html", "w") or die("Unable to open system file!");
+	addSubHeader($sysFile, "System", array("Dmesg", "CPU Info", "lspci"));
+	
+	openChapter($sysFile, "System", "dmesg");
+	runCmd($DMESG, $sysFile);
+	closeChapter($sysFile);
+
+	openChapter($sysFile, "System", "CPU Info");
+	runCmd($CPUINFO, $sysFile);
+	closeChapter($sysFile);
+	
+	openChapter($sysFile, "System", "lspci");
+	runCmd($LSPCI, $sysFile);
+	closeChapter($sysFile);
+	
+	addSubFooter($sysFile);
+	fclose($sysFile);
+}
 ?>
