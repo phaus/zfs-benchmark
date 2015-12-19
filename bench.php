@@ -13,7 +13,7 @@ $FREE = "free -h";
 $HOSTNAME = "hostname";
 $UNAME = "uname -a";
 $TOP="(top -b -n 1 | head -n 20) ";
-
+$CAT="/bin/cat";
 $CPUINFO="cat /proc/cpuinfo";
 $DMESG="dmesg";
 $LSPCI="lspci";
@@ -167,7 +167,7 @@ fclose($indexFile);
 
 
 function runBoonie($benchFile, $key) {
-	global $TOP, $BOONIE, $BON_CSV2HTML;
+	global $TOP, $BOONIE, $BON_CSV2HTML, $CAT;
 	
 	openChapter($benchFile, $key, "Boonie");
 	runCmd("echo \"start \" && date", $benchFile);	
@@ -180,7 +180,10 @@ function runBoonie($benchFile, $key) {
 	$cmd = $BON_CSV2HTML." bench/".$key."/boonie.csv > bench/".$key."/boonie.html";
 	$output = shell_exec($cmd." 2>&1");
 	fwrite($benchFile, "<kbd>".$cmd."</kbd>\n<br />\n");
-
+	$cmd = $CAT." bench/".$key."/boonie.html";
+	$output = shell_exec($cmd." 2>&1");
+	fwrite($benchFile, splitBoonieOutput($output)."\n");
+	fwrite($benchFile, "</p>\n");
 	runCmd($TOP, $benchFile);
 	runCmd("echo \"end \" && date", $benchFile);
 	closeChapter($benchFile);
@@ -198,11 +201,7 @@ function addHeader($benchFile, $key) {
 	fwrite($benchFile, "<link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css\" integrity=\"sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7\" crossorigin=\"anonymous\">\n");
 	fwrite($benchFile, "\n<!-- Optional theme -->\n");
 	fwrite($benchFile, "<link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css\" integrity=\"sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r\" crossorigin=\"anonymous\">\n");
-	fwrite($benchFile, "<style>");
-	fwrite($benchFile, "body { padding-top: 70px; }");
-	fwrite($benchFile, "a.anchor { margin-top:60px; top: -60px; position: relative; visibility: hidden;}"); 
-	fwrite($benchFile, ".center { text-align:center; }"); 
-	fwrite($benchFile, "</style>\n");
+	addStyles($benchFile);
 	fwrite($benchFile, "</head>\n<body>\n");
 	fwrite($benchFile, "<div class=\"container\">\n");
 	fwrite($benchFile, "<div class=\"row\">\n");
@@ -226,11 +225,7 @@ function addSubHeader($benchFile, $key, $nav) {
 	fwrite($benchFile, "<link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css\" integrity=\"sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7\" crossorigin=\"anonymous\">\n");
 	fwrite($benchFile, "\n<!-- Optional theme -->\n");
 	fwrite($benchFile, "<link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css\" integrity=\"sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r\" crossorigin=\"anonymous\">\n");
-	fwrite($benchFile, "<style>");
-	fwrite($benchFile, "body { padding-top: 70px; }");
-	fwrite($benchFile, "a.anchor { margin-top:60px; top: -60px; position: relative; visibility: hidden;}"); 
-	fwrite($benchFile, ".center { text-align:center; }"); 
-	fwrite($benchFile, "</style>\n");
+	addStyles($benchFile);
 	fwrite($benchFile, "</head>\n<body>\n");
 	fwrite($benchFile, "<nav class=\"navbar navbar-default navbar-fixed-top\">\n");
 	  fwrite($benchFile, "<div class=\"container-fluid\">\n");
@@ -266,9 +261,19 @@ function addSubFooter($benchFile) {
 	fwrite($benchFile, "\n</body>\n</html>\n");
 }
 
+function addStyles($file) {
+	fwrite($file, "<style type\"text/css\">");
+	fwrite($file, "body { padding-top: 70px; }");
+	fwrite($file, "a.anchor { margin-top:60px; top: -60px; position: relative; visibility: hidden;}"); 
+	fwrite($file, ".center { text-align:center; }"); 
+	// styles for Boonie
+	fwrite($file, "td.header {text-align: center; backgroundcolor: \"#CCFFFF\" }td.rowheader {text-align: center; backgroundcolor: \"#CCCFFF\" }td.size {text-align: center; backgroundcolor: \"#CCCFFF\" }td.ksec {text-align: center; fontstyle: italic }");
+	fwrite($file, "</style>\n");
+}
+
 function openChapter($benchFile, $key, $name) {
 	$anchor = getAnchor($key, $name);
-	fwrite($benchFile, "<a class=\"anchor\" aria-hidden=\"true\" id=\"".$anchor."\"></a><h2><small><a href=\"#".$anchor."\">#</a></small>".$name."</h2>\n");
+	fwrite($benchFile, "<a class=\"anchor\" aria-hidden=\"true\" id=\"".$anchor."\"></a> <h2><small><a href=\"#".$anchor."\">#</a></small>".$name."</h2>\n");
 }
 
 function closeChapter($benchFile) {
@@ -333,4 +338,11 @@ function addSystemFile() {
 	addSubFooter($sysFile);
 	fclose($sysFile);
 }
+
+function splitBoonieOutput($output) {
+	$start = strripos($output, "<table");
+	$end = strripos($output, "</table>");
+	return $start && $end ? substr($output, $start, $end-$start)."</table>" : "";
+}
+
 ?>
