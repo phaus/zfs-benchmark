@@ -20,7 +20,7 @@ $LSPCI="lspci";
 
 $DD_READ="(time sh -c \"dd if=/tank/tmp of=/dev/null bs=4k\") ";
 $DD_WRITE="(time sh -c \"dd if=/dev/zero of=/tank/tmp bs=4k count=".$SIZE_B_AS_4k." && sync\") ";
-$BOONIE="/usr/sbin/bonnie++ -d /tank -r ".$SIZE_MB." -u root -s 0 -n 128";
+$BOONIE="/usr/sbin/bonnie++ -d /tank -r ".$SIZE_MB." -u root -n 128";
 $BON_CSV2HTML = "/usr/bin/bon_csv2html";
 
 $ZPOOL = "/sbin/zpool";
