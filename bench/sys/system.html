@@ -8,7 +8,7 @@
 
 <!-- Optional theme -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
-<style>body { padding-top: 70px; }a.anchor { margin-top:60px; top: -60px; position: relative; visibility: hidden;}.center { text-align:center; }</style>
+<style type"text/css">body { padding-top: 70px; }a.anchor { margin-top:60px; top: -60px; position: relative; visibility: hidden;}.center { text-align:center; }td.header {text-align: center; backgroundcolor: "#CCFFFF" }td.rowheader {text-align: center; backgroundcolor: "#CCCFFF" }td.size {text-align: center; backgroundcolor: "#CCCFFF" }td.ksec {text-align: center; fontstyle: italic }</style>
 </head>
 <body>
 <nav class="navbar navbar-default navbar-fixed-top">
@@ -18,12 +18,20 @@
 back to Index
 </a>
 </div>
+<div class="collapse navbar-collapse">
+<ul class="nav navbar-nav">
+<li><a href="#system_dmesg">Dmesg</a></li>
+<li><a href="#system_cpu_info">CPU Info</a></li>
+<li><a href="#system_lspci">lspci</a></li>
+</ul>
+</div>
 </div>
 </nav>
 <div class="container">
 <div class="row">
 <div class="col-md-10">
 <h1>System</h1>
+<a class="anchor" aria-hidden="true" id="system_dmesg"></a> <h2><small><a href="#system_dmesg">#</a></small>dmesg</h2>
 <p class="cmd">
 <kbd>dmesg</kbd>
 <br />
@@ -1193,8 +1201,13 @@ back to Index
 [ 7233.492182]  sda: sda1 sda9
 [ 7233.616363]  sdb: sdb1 sdb9
 [ 7821.196917] perf interrupt took too long (5056 > 5000), lowering kernel.perf_event_max_sample_rate to 25000
+[10300.637490]  sda: sda1 sda9
+[12153.614356]  sda: sda1 sda9
+[12153.733396]  sdb: sdb1 sdb9
+[13579.042443]  sda: sda1 sda9
 </pre></samp>
 </p>
+<a class="anchor" aria-hidden="true" id="system_cpu_info"></a> <h2><small><a href="#system_cpu_info">#</a></small>CPU Info</h2>
 <p class="cmd">
 <kbd>cat /proc/cpuinfo</kbd>
 <br />
@@ -1491,7 +1504,7 @@ model		: 26
 model name	: Intel(R) Xeon(R) CPU           E5530  @ 2.40GHz
 stepping	: 5
 microcode	: 0x16
-cpu MHz		: 1824.000
+cpu MHz		: 1752.000
 cache size	: 8192 KB
 physical id	: 1
 siblings	: 8
@@ -1616,6 +1629,7 @@ power management:
 
 </pre></samp>
 </p>
+<a class="anchor" aria-hidden="true" id="system_lspci"></a> <h2><small><a href="#system_lspci">#</a></small>lspci</h2>
 <p class="cmd">
 <kbd>lspci</kbd>
 <br />
