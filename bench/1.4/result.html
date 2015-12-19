@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Benchmark 1.4</title>
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+<style> body { padding-top: 70px; }; .center {text-align:center;} </style>
+</head>
+<body>
+<nav class="navbar navbar-default navbar-fixed-top">
+<div class="container-fluid">
+<div class="navbar-header">
+<a class="navbar-brand" href="../index.html">
+back to Index
+</a>
+</div>
+</div>
+</nav>
+<div class="container">
+<div class="row">
+<div class="col-md-10">
+<h1>1.4</h1>
+<h2>Benchmark Details</h2>
+<p class="cmd">
+<kbd>echo "init " && date</kbd>
+<br />
+<samp><pre>init 
+Sat Dec 19 17:00:25 CET 2015
+</pre></samp>
+</p>
+<h2>Pool Setup</h2>
+<p class="cmd">
+<kbd>/sbin/zpool create tank /dev/sda /dev/sdb /dev/sde /dev/sdf</kbd>
+<br />
+<samp><pre>sh: /sbin/zpool: No such file or directory
+</pre></samp>
+</p>
+<p class="cmd">
+<kbd>/sbin/zpool status</kbd>
+<br />
+<samp><pre>sh: /sbin/zpool: No such file or directory
+</pre></samp>
+</p>
+<p class="cmd">
+<kbd>/sbin/zpool list</kbd>
+<br />
+<samp><pre>sh: /sbin/zpool: No such file or directory
+</pre></samp>
+</p>
+<p class="cmd">
+<kbd>/sbin/zfs list</kbd>
+<br />
+<samp><pre>sh: /sbin/zfs: No such file or directory
+</pre></samp>
+</p>
+<h2>Benchmark</h2>
+<p class="cmd">
+<kbd>echo "start " && date</kbd>
+<br />
+<samp><pre>start 
+Sat Dec 19 17:00:25 CET 2015
+</pre></samp>
+</p>
+<p class="cmd">
+<kbd>top -b -n 1</kbd>
+<br />
+<samp><pre>invalid option or syntax: -b
+top usage: top
+		[-a | -d | -e | -c <mode>]
+		[-F | -f]
+		[-h]
+		[-i <interval>]
+		[-l <samples>]
+		[-ncols <columns>]
+		[-o <key>] [-O <secondaryKey>]
+		[-R | -r]
+		[-S]
+		[-s <delay>]
+		[-n <nprocs>]
+		[-stats <key(s)>]
+		[-pid <processid>]
+		[-user <username>]
+		[-U <username>]
+		[-u]
+
+</pre></samp>
+</p>
+<p class="cmd">
+<kbd>/usr/sbin/bonnie++ -d /tank -r 16384 -u root</kbd>
+<br />
+<samp><pre>sh: /usr/sbin/bonnie++: No such file or directory
+</pre></samp>
+</p>
+<p class="cmd">
+<kbd>top -b -n 1</kbd>
+<br />
+<samp><pre>invalid option or syntax: -b
+top usage: top
+		[-a | -d | -e | -c <mode>]
+		[-F | -f]
+		[-h]
+		[-i <interval>]
+		[-l <samples>]
+		[-ncols <columns>]
+		[-o <key>] [-O <secondaryKey>]
+		[-R | -r]
+		[-S]
+		[-s <delay>]
+		[-n <nprocs>]
+		[-stats <key(s)>]
+		[-pid <processid>]
+		[-user <username>]
+		[-U <username>]
+		[-u]
+
+</pre></samp>
+</p>
+<p class="cmd">
+<kbd>(time sh -c "dd if=/dev/zero of=/tank/tmp bs=4k count=16777216 && sync") </kbd>
+<br />
+<samp><pre>dd: /tank/tmp: No such file or directory
+
+real	0m0.006s
+user	0m0.002s
+sys	0m0.003s
+</pre></samp>
+</p>
+<p class="cmd">
+<kbd>top -b -n 1</kbd>
+<br />
+<samp><pre>invalid option or syntax: -b
+top usage: top
+		[-a | -d | -e | -c <mode>]
+		[-F | -f]
+		[-h]
+		[-i <interval>]
+		[-l <samples>]
+		[-ncols <columns>]
+		[-o <key>] [-O <secondaryKey>]
+		[-R | -r]
+		[-S]
+		[-s <delay>]
+		[-n <nprocs>]
+		[-stats <key(s)>]
+		[-pid <processid>]
+		[-user <username>]
+		[-U <username>]
+		[-u]
+
+</pre></samp>
+</p>
+<p class="cmd">
+<kbd>(time sh -c "dd if=/tank/tmp of=/dev/null bs=4k") </kbd>
+<br />
+<samp><pre>dd: /tank/tmp: No such file or directory
+
+real	0m0.005s
+user	0m0.002s
+sys	0m0.002s
+</pre></samp>
+</p>
+<p class="cmd">
+<kbd>top -b -n 1</kbd>
+<br />
+<samp><pre>invalid option or syntax: -b
+top usage: top
+		[-a | -d | -e | -c <mode>]
+		[-F | -f]
+		[-h]
+		[-i <interval>]
+		[-l <samples>]
+		[-ncols <columns>]
+		[-o <key>] [-O <secondaryKey>]
+		[-R | -r]
+		[-S]
+		[-s <delay>]
+		[-n <nprocs>]
+		[-stats <key(s)>]
+		[-pid <processid>]
+		[-user <username>]
+		[-U <username>]
+		[-u]
+
+</pre></samp>
+</p>
+<p class="cmd">
+<kbd>echo "end " && date</kbd>
+<br />
+<samp><pre>end 
+Sat Dec 19 17:00:26 CET 2015
+</pre></samp>
+</p>
+<h2>Cleanup</h2>
+<p class="cmd">
+<kbd>/sbin/zpool destroy -f tank</kbd>
+<br />
+<samp><pre>sh: /sbin/zpool: No such file or directory
+</pre></samp>
+</p>
+<p class="cmd">
+<kbd>echo "done " && date</kbd>
+<br />
+<samp><pre>done 
+Sat Dec 19 17:00:26 CET 2015
+</pre></samp>
+</p>
+</div>
+<div class="col-md-2">
+</div>
+</div>
+</div>
+<div class="container-fluid">
+<div class="center row">&copy; 2015 Philipp Haussleiter</div>
+</div>
+
+</body>
+</html>
