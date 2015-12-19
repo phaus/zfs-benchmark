@@ -4,6 +4,7 @@
 $SIZE_GB=16;
 $SIZE_MB=$SIZE_GB*1024;
 $SIZE_B=$SIZE_MB*1024;
+$SIZE_B_AS_4k=$SIZE_B/4;
 
 $DISK_INDEX_CMD = "fdisk -l | grep Disk";
 $TANK_SIZE_CMD = "du -sh /tank";
@@ -11,14 +12,14 @@ $DATE = "date";
 $FREE = "free -h";
 $HOSTNAME = "hostname";
 $UNAME = "uname -a";
-$TOP="top -b -n 1";
+$TOP="(top -b -n 1 | head -n 20) ";
 
 $CPUINFO="cat /proc/cpuinfo";
 $DMESG="dmesg";
 $LSPCI="lspci";
 
 $DD_READ="(time sh -c \"dd if=/tank/tmp of=/dev/null bs=4k\") ";
-$DD_WRITE="(time sh -c \"dd if=/dev/zero of=/tank/tmp bs=4k count=".$SIZE_B." && sync\") ";
+$DD_WRITE="(time sh -c \"dd if=/dev/zero of=/tank/tmp bs=4k count=".$SIZE_B_AS_4k." && sync\") ";
 $BOONIE="/usr/sbin/bonnie++ -d /tank -r ".$SIZE_MB." -u root";
 
 $ZPOOL = "/sbin/zpool";
@@ -81,12 +82,13 @@ exec("mkdir -p bench");
 $indexFile = fopen("bench/index.html", "w") or die("Unable to open index file!");
 addHeader($indexFile, "ZFS Benchmark");
 
-openChapter($indexFile, "Details");
+openChapter($indexFile, "Index", "Details");
 runCmd($DATE, $indexFile);
 runCmd($HOSTNAME, $indexFile);
 runCmd($UNAME, $indexFile);
 runCmd($FREE, $indexFile);
 runCmd($DISK_INDEX_CMD, $indexFile);
+
 exec("mkdir -p bench/sys");
 $sysFile = fopen("bench/sys/system.html", "w") or die("Unable to open system file!");
 addSubHeader($sysFile, "System");
@@ -99,7 +101,7 @@ fwrite($indexFile, "<p><a href=\"sys/system.html\">...more</a></p>\n");
 fwrite($indexFile, "<p><kbd>Test Size</kbd><br /><samp>".$SIZE_GB." GB</samp></p>\n");
 closeChapter($indexFile);
 
-openChapter($indexFile, "Benchmarks");
+openChapter($indexFile, "Index", "Benchmarks");
 fwrite($indexFile, "<dl>\n");
 
 $i = 0;
@@ -110,11 +112,11 @@ foreach ($ZPOOL_CREATE_CMDS as $key => $cmd) {
 	$benchFile = fopen("bench/".$key."/result.html", "w") or die("Unable to open ".$key." file!");
 	addSubHeader($benchFile, $key);
 
-	openChapter($benchFile, "Benchmark Details");
+	openChapter($benchFile, $key, "Benchmark Details");
 	runCmd("echo \"init \" && date", $benchFile);
 	closeChapter($benchFile);
 
-	openChapter($benchFile, "Pool Setup");
+	openChapter($benchFile, $key, "Pool Setup");
 	runCmd($ZPOOL." ".$cmd, $benchFile);
 	$poolCmds .= $ZPOOL." ".$cmd."\n";
 	if(isset($ZPOOL_CACHE[$key])) {
@@ -130,10 +132,15 @@ foreach ($ZPOOL_CREATE_CMDS as $key => $cmd) {
 	runCmd($ZFS." ".$ZFS_LIST, $benchFile);		
 	closeChapter($benchFile);
 
-	openChapter($benchFile, "Benchmark");
+	openChapter($benchFile, $key, "Boonie Benchmark");
 	runCmd("echo \"start \" && date", $benchFile);	
 	runCmd($TOP, $benchFile);
 	runCmd($BOONIE, $benchFile);
+	runCmd($TOP, $benchFile);
+	runCmd("echo \"end \" && date", $benchFile);
+	closeChapter($benchFile);
+	openChapter($benchFile, $key, "DD Benchmark");
+	runCmd("echo \"start \" && date", $benchFile);
 	runCmd($TOP, $benchFile);
 	runCmd($DD_WRITE, $benchFile);
 	runCmd($TOP, $benchFile);
@@ -142,7 +149,7 @@ foreach ($ZPOOL_CREATE_CMDS as $key => $cmd) {
 	runCmd("echo \"end \" && date", $benchFile);
 	closeChapter($benchFile);
 
-	openChapter($benchFile, "Cleanup");
+	openChapter($benchFile, $key, "Cleanup");
 	runCmd($ZPOOL." ".$ZPOOL_DESTROY_CMD, $benchFile);
 	runCmd("echo \"done \" && date", $benchFile);
 	closeChapter($benchFile);
@@ -156,7 +163,7 @@ foreach ($ZPOOL_CREATE_CMDS as $key => $cmd) {
 fwrite($indexFile, "</dl>\n");
 closeChapter($indexFile);
 
-openChapter($indexFile, "Benchmark Matrix");
+openChapter($indexFile, "Index", "Benchmark Matrix");
 createTestMatrix($indexFile);
 closeChapter($indexFile);
 
@@ -176,7 +183,11 @@ function addHeader($benchFile, $key) {
 	fwrite($benchFile, "<link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css\" integrity=\"sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7\" crossorigin=\"anonymous\">\n");
 	fwrite($benchFile, "\n<!-- Optional theme -->\n");
 	fwrite($benchFile, "<link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css\" integrity=\"sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r\" crossorigin=\"anonymous\">\n");
-	fwrite($benchFile, "<style> body { padding-top: 70px; }; .center {text-align:center;} </style>\n");
+	fwrite($benchFile, "<style>");
+	fwrite($benchFile, "body { padding-top: 70px; }");
+	fwrite($benchFile, "a.anchor { margin-top:60px; top: -60px; position: relative; visibility: hidden;}"); 
+	fwrite($benchFile, ".center { text-align:center; }"); 
+	fwrite($benchFile, "</style>\n");
 	fwrite($benchFile, "</head>\n<body>\n");
 	fwrite($benchFile, "<div class=\"container\">\n");
 	fwrite($benchFile, "<div class=\"row\">\n");
@@ -200,7 +211,11 @@ function addSubHeader($benchFile, $key) {
 	fwrite($benchFile, "<link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css\" integrity=\"sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7\" crossorigin=\"anonymous\">\n");
 	fwrite($benchFile, "\n<!-- Optional theme -->\n");
 	fwrite($benchFile, "<link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css\" integrity=\"sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r\" crossorigin=\"anonymous\">\n");
-	fwrite($benchFile, "<style> body { padding-top: 70px; }; .center {text-align:center;} </style>\n");
+	fwrite($benchFile, "<style>");
+	fwrite($benchFile, "body { padding-top: 70px; }");
+	fwrite($benchFile, "a.anchor { margin-top:60px; top: -60px; position: relative; visibility: hidden;}"); 
+	fwrite($benchFile, ".center { text-align:center; }"); 
+	fwrite($benchFile, "</style>\n");
 	fwrite($benchFile, "</head>\n<body>\n");
 	fwrite($benchFile, "<nav class=\"navbar navbar-default navbar-fixed-top\">\n");
 	  fwrite($benchFile, "<div class=\"container-fluid\">\n");
@@ -229,8 +244,9 @@ function addSubFooter($benchFile) {
 	fwrite($benchFile, "\n</body>\n</html>\n");
 }
 
-function openChapter($benchFile, $name) {
-	fwrite($benchFile, "<h2>".$name."</h2>\n");
+function openChapter($benchFile, $key, $name) {
+	$anchor = strtolower(str_replace(" ", "_",$key." ".$name));
+	fwrite($benchFile, "<a class=\"anchor\" aria-hidden=\"true\" id=\"".$anchor."\"></a><h2><small><a href=\"#".$anchor."\">#</a></small>".$name."</h2>\n");
 }
 
 function closeChapter($benchFile) {
