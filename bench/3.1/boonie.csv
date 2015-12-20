@@ -1,21 +1,24 @@
-sh: /usr/sbin/bonnie++: No such file or directory
-sh: /usr/sbin/bonnie++: No such file or directory
-sh: /usr/sbin/bonnie++: No such file or directory
-sh: /usr/sbin/bonnie++: No such file or directory
-sh: /usr/sbin/bonnie++: No such file or directory
-sh: /usr/sbin/bonnie++: No such file or directory
-sh: /usr/sbin/bonnie++: No such file or directory
-sh: /usr/sbin/bonnie++: No such file or directory
-sh: /usr/sbin/bonnie++: No such file or directory
-sh: /usr/sbin/bonnie++: No such file or directory
-sh: /usr/sbin/bonnie++: No such file or directory
-sh: /usr/sbin/bonnie++: No such file or directory
-sh: /usr/sbin/bonnie++: No such file or directory
-sh: /usr/sbin/bonnie++: No such file or directory
-sh: /usr/sbin/bonnie++: No such file or directory
-sh: /usr/sbin/bonnie++: No such file or directory
-sh: /usr/sbin/bonnie++: No such file or directory
-sh: /usr/sbin/bonnie++: No such file or directory
-sh: /usr/sbin/bonnie++: No such file or directory
-sh: /usr/sbin/bonnie++: No such file or directory
-sh: /usr/sbin/bonnie++: No such file or directory
+Using uid:0, gid:0.
+Writing a byte at a time...done
+Writing intelligently...done
+Rewriting...done
+Reading a byte at a time...done
+Reading intelligently...done
+start 'em...done...done...done...done...done...
+Create files in sequential order...done.
+Stat files in sequential order...done.
+Delete files in sequential order...done.
+Create files in random order...done.
+Stat files in random order...done.
+Delete files in random order...done.
+Version  1.97       ------Sequential Output------ --Sequential Input- --Random-
+Concurrency   1     -Per Chr- --Block-- -Rewrite- -Per Chr- --Block-- --Seeks--
+Machine        Size K/sec %CP K/sec %CP K/sec %CP K/sec %CP K/sec %CP  /sec %CP
+dl380           16G   138  99 246470  54 104219  21   437  96 248427  18 188.7  12
+Latency             62167us   20865us    2086ms     252ms     210ms     171ms
+Version  1.97       ------Sequential Create------ --------Random Create--------
+dl380               -Create-- --Read--- -Delete-- -Create-- --Read--- -Delete--
+              files  /sec %CP  /sec %CP  /sec %CP  /sec %CP  /sec %CP  /sec %CP
+                128 16793  99 +++++ +++ 17564  99 19149  99 +++++ +++ 16146  99
+Latency               168ms     459us     852us     121ms     130us     789us
+1.97,1.97,dl380,1,1450571061,16G,,138,99,246470,54,104219,21,437,96,248427,18,188.7,12,128,,,,,16793,99,+++++,+++,17564,99,19149,99,+++++,+++,16146,99,62167us,20865us,2086ms,252ms,210ms,171ms,168ms,459us,852us,121ms,130us,789us

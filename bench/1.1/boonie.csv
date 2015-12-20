@@ -14,11 +14,11 @@ Delete files in random order...done.
 Version  1.97       ------Sequential Output------ --Sequential Input- --Random-
 Concurrency   1     -Per Chr- --Block-- -Rewrite- -Per Chr- --Block-- --Seeks--
 Machine        Size K/sec %CP K/sec %CP K/sec %CP K/sec %CP K/sec %CP  /sec %CP
-dl380           32G   142  99 101761  28 45570   8   436  95 93022   6  92.9   7
-Latency             63907us   40020us    2951ms     204ms     998ms     565ms
+dl380           16G   141  99 105481  28 47185   9   410  92 107987   7 138.8   8
+Latency             61520us   76174us    2470ms     402ms     961ms     304ms
 Version  1.97       ------Sequential Create------ --------Random Create--------
 dl380               -Create-- --Read--- -Delete-- -Create-- --Read--- -Delete--
               files  /sec %CP  /sec %CP  /sec %CP  /sec %CP  /sec %CP  /sec %CP
-                 16 23836  98 +++++ +++ 24088  98 20242  98 +++++ +++ 23937  98
-Latency             19222us     299us     354us   40332us     148us     205us
-1.97,1.97,dl380,1,1450554971,32G,,142,99,101761,28,45570,8,436,95,93022,6,92.9,7,16,,,,,23836,98,+++++,+++,24088,98,20242,98,+++++,+++,23937,98,63907us,40020us,2951ms,204ms,998ms,565ms,19222us,299us,354us,40332us,148us,205us
+                128 16839  99 +++++ +++ 18418  99 15962  99 +++++ +++ 16326  99
+Latency               169ms     311us     673us   75131us      26us    1027us
+1.97,1.97,dl380,1,1450563812,16G,,141,99,105481,28,47185,9,410,92,107987,7,138.8,8,128,,,,,16839,99,+++++,+++,18418,99,15962,99,+++++,+++,16326,99,61520us,76174us,2470ms,402ms,961ms,304ms,169ms,311us,673us,75131us,26us,1027us

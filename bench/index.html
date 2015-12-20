@@ -19,7 +19,7 @@
 <p class="cmd">
 <kbd>date</kbd>
 <br />
-<samp><pre>Sat Dec 19 20:24:46 CET 2015
+<samp><pre>Sat Dec 19 22:46:13 CET 2015
 </pre></samp>
 </p>
 <p class="cmd">
@@ -38,8 +38,8 @@
 <kbd>free -h</kbd>
 <br />
 <samp><pre>             total       used       free     shared    buffers     cached
-Mem:          7.8G       604M       7.2G       892K        17M        75M
--/+ buffers/cache:       510M       7.3G
+Mem:          7.8G       278M       7.5G       884K        16M        65M
+-/+ buffers/cache:       196M       7.6G
 Swap:         279M         0B       279M
 </pre></samp>
 </p>
@@ -48,9 +48,9 @@ Swap:         279M         0B       279M
 <br />
 <samp><pre>Disk /dev/sda: 1000.2 GB, 1000171331584 bytes
 Disk identifier: 0x00000000
-Disk /dev/sdb: 1000.2 GB, 1000171331584 bytes
-Disk identifier: 0x00000000
 Disk /dev/sdc: 256.0 GB, 256022937600 bytes
+Disk identifier: 0x00000000
+Disk /dev/sdb: 1000.2 GB, 1000171331584 bytes
 Disk identifier: 0x00000000
 Disk /dev/sdd: 250.0 GB, 250023444480 bytes
 Disk identifier: 0x00000000
@@ -71,9 +71,208 @@ Disk identifier: 0x00000000
 </pre></samp>
 </p>
 <p><a href="sys/system.html">...more</a></p>
-<p><kbd>Test Size</kbd><br /><samp>16 GB</samp></p>
+<p><kbd>Test Size</kbd><br /><samp>8 GB</samp></p>
 <a class="anchor" aria-hidden="true" id="index_benchmarks"></a> <h2><small><a href="#index_benchmarks">#</a></small>Benchmarks</h2>
 <dl>
 	<dt><a href="1.1/result.html">1. Benchmark:</a></dt>
 	<dd><pre>/sbin/zpool create tank /dev/sda
 </pre></dd>
+	<dt><a href="1.2/result.html">2. Benchmark:</a></dt>
+	<dd><pre>/sbin/zpool create tank /dev/sda /dev/sdb
+</pre></dd>
+	<dt><a href="1.3/result.html">3. Benchmark:</a></dt>
+	<dd><pre>/sbin/zpool create tank /dev/sda /dev/sdb /dev/sde
+</pre></dd>
+	<dt><a href="1.4/result.html">4. Benchmark:</a></dt>
+	<dd><pre>/sbin/zpool create tank /dev/sda /dev/sdb /dev/sde /dev/sdf
+</pre></dd>
+	<dt><a href="1.5/result.html">5. Benchmark:</a></dt>
+	<dd><pre>/sbin/zpool create tank /dev/sda /dev/sdb /dev/sdc /dev/sdd /dev/sde /dev/sdf /dev/sdg
+</pre></dd>
+	<dt><a href="2.1/result.html">6. Benchmark:</a></dt>
+	<dd><pre>/sbin/zpool create tank mirror /dev/sda /dev/sdb
+</pre></dd>
+	<dt><a href="2.2/result.html">7. Benchmark:</a></dt>
+	<dd><pre>/sbin/zpool create tank mirror /dev/sda /dev/sde
+</pre></dd>
+	<dt><a href="2.3/result.html">8. Benchmark:</a></dt>
+	<dd><pre>/sbin/zpool create tank mirror /dev/sda /dev/sdb mirror /dev/sde /dev/sdf
+</pre></dd>
+	<dt><a href="2.4/result.html">9. Benchmark:</a></dt>
+	<dd><pre>/sbin/zpool create tank mirror /dev/sda /dev/sdb mirror /dev/sde /dev/sdf
+/sbin/zpool add tank cache /dev/sdc
+</pre></dd>
+	<dt><a href="2.5/result.html">10. Benchmark:</a></dt>
+	<dd><pre>/sbin/zpool create tank mirror /dev/sda /dev/sdb mirror /dev/sde /dev/sdf
+/sbin/zpool add tank cache /dev/sdc /dev/sdg
+</pre></dd>
+	<dt><a href="2.6/result.html">11. Benchmark:</a></dt>
+	<dd><pre>/sbin/zpool create tank mirror /dev/sda /dev/sdb mirror /dev/sde /dev/sdf
+/sbin/zpool add tank cache /dev/sdc /dev/sdg
+/sbin/zpool add -f tank log /dev/sdd
+</pre></dd>
+	<dt><a href="3.1/result.html">12. Benchmark:</a></dt>
+	<dd><pre>/sbin/zpool create tank raidz /dev/sda /dev/sdb /dev/sde /dev/sdf
+</pre></dd>
+	<dt><a href="3.2/result.html">13. Benchmark:</a></dt>
+	<dd><pre>/sbin/zpool create tank raidz /dev/sda /dev/sdb /dev/sde /dev/sdf
+/sbin/zpool add tank cache /dev/sdc
+</pre></dd>
+	<dt><a href="3.3/result.html">14. Benchmark:</a></dt>
+	<dd><pre>/sbin/zpool create tank raidz /dev/sda /dev/sdb /dev/sde /dev/sdf
+/sbin/zpool add tank cache /dev/sdc /dev/sdg
+</pre></dd>
+	<dt><a href="3.4/result.html">15. Benchmark:</a></dt>
+	<dd><pre>/sbin/zpool create tank raidz /dev/sda /dev/sdb /dev/sde /dev/sdf
+/sbin/zpool add tank cache /dev/sdc /dev/sdg
+/sbin/zpool add -f tank log /dev/sdd
+</pre></dd>
+	<dt><a href="4.1/result.html">16. Benchmark:</a></dt>
+	<dd><pre>/sbin/zpool create tank raidz2 /dev/sda /dev/sdb /dev/sde /dev/sdf
+</pre></dd>
+	<dt><a href="4.2/result.html">17. Benchmark:</a></dt>
+	<dd><pre>/sbin/zpool create tank raidz2 /dev/sda /dev/sdb /dev/sde /dev/sdf
+/sbin/zpool add tank cache /dev/sdc
+</pre></dd>
+	<dt><a href="4.3/result.html">18. Benchmark:</a></dt>
+	<dd><pre>/sbin/zpool create tank raidz2 /dev/sda /dev/sdb /dev/sde /dev/sdf
+/sbin/zpool add tank cache /dev/sdc /dev/sdg
+</pre></dd>
+	<dt><a href="4.4/result.html">19. Benchmark:</a></dt>
+	<dd><pre>/sbin/zpool create tank raidz2 /dev/sda /dev/sdb /dev/sde /dev/sdf
+/sbin/zpool add tank cache /dev/sdc /dev/sdg
+/sbin/zpool add -f tank log /dev/sdd
+</pre></dd>
+</dl>
+<a class="anchor" aria-hidden="true" id="index_benchmark_matrix"></a> <h2><small><a href="#index_benchmark_matrix">#</a></small>Benchmark Matrix</h2>
+<table class="table table-striped">
+<tr>
+<th>Benchmark</th>
+<th>Pool</th>
+<th>Cache</th>
+<th>Log</th>
+</tr>
+<tr>
+<th><a href="1.1/result.html">1.1</a></th>
+<td><pre>/sbin/zpool create tank /dev/sda</pre></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<th><a href="1.2/result.html">1.2</a></th>
+<td><pre>/sbin/zpool create tank /dev/sda /dev/sdb</pre></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<th><a href="1.3/result.html">1.3</a></th>
+<td><pre>/sbin/zpool create tank /dev/sda /dev/sdb /dev/sde</pre></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<th><a href="1.4/result.html">1.4</a></th>
+<td><pre>/sbin/zpool create tank /dev/sda /dev/sdb /dev/sde /dev/sdf</pre></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<th><a href="1.5/result.html">1.5</a></th>
+<td><pre>/sbin/zpool create tank /dev/sda /dev/sdb /dev/sdc /dev/sdd /dev/sde /dev/sdf /dev/sdg</pre></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<th><a href="2.1/result.html">2.1</a></th>
+<td><pre>/sbin/zpool create tank mirror /dev/sda /dev/sdb</pre></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<th><a href="2.2/result.html">2.2</a></th>
+<td><pre>/sbin/zpool create tank mirror /dev/sda /dev/sde</pre></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<th><a href="2.3/result.html">2.3</a></th>
+<td><pre>/sbin/zpool create tank mirror /dev/sda /dev/sdb mirror /dev/sde /dev/sdf</pre></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<th><a href="2.4/result.html">2.4</a></th>
+<td><pre>/sbin/zpool create tank mirror /dev/sda /dev/sdb mirror /dev/sde /dev/sdf</pre></td>
+<td><pre>/sbin/zpool add tank cache /dev/sdc</pre></td>
+<td></td>
+</tr>
+<tr>
+<th><a href="2.5/result.html">2.5</a></th>
+<td><pre>/sbin/zpool create tank mirror /dev/sda /dev/sdb mirror /dev/sde /dev/sdf</pre></td>
+<td><pre>/sbin/zpool add tank cache /dev/sdc /dev/sdg</pre></td>
+<td></td>
+</tr>
+<tr>
+<th><a href="2.6/result.html">2.6</a></th>
+<td><pre>/sbin/zpool create tank mirror /dev/sda /dev/sdb mirror /dev/sde /dev/sdf</pre></td>
+<td><pre>/sbin/zpool add tank cache /dev/sdc /dev/sdg</pre></td>
+<td><pre>/sbin/zpool add -f tank log /dev/sdd</pre></td>
+</tr>
+<tr>
+<th><a href="3.1/result.html">3.1</a></th>
+<td><pre>/sbin/zpool create tank raidz /dev/sda /dev/sdb /dev/sde /dev/sdf</pre></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<th><a href="3.2/result.html">3.2</a></th>
+<td><pre>/sbin/zpool create tank raidz /dev/sda /dev/sdb /dev/sde /dev/sdf</pre></td>
+<td><pre>/sbin/zpool add tank cache /dev/sdc</pre></td>
+<td></td>
+</tr>
+<tr>
+<th><a href="3.3/result.html">3.3</a></th>
+<td><pre>/sbin/zpool create tank raidz /dev/sda /dev/sdb /dev/sde /dev/sdf</pre></td>
+<td><pre>/sbin/zpool add tank cache /dev/sdc /dev/sdg</pre></td>
+<td></td>
+</tr>
+<tr>
+<th><a href="3.4/result.html">3.4</a></th>
+<td><pre>/sbin/zpool create tank raidz /dev/sda /dev/sdb /dev/sde /dev/sdf</pre></td>
+<td><pre>/sbin/zpool add tank cache /dev/sdc /dev/sdg</pre></td>
+<td><pre>/sbin/zpool add -f tank log /dev/sdd</pre></td>
+</tr>
+<tr>
+<th><a href="4.1/result.html">4.1</a></th>
+<td><pre>/sbin/zpool create tank raidz2 /dev/sda /dev/sdb /dev/sde /dev/sdf</pre></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<th><a href="4.2/result.html">4.2</a></th>
+<td><pre>/sbin/zpool create tank raidz2 /dev/sda /dev/sdb /dev/sde /dev/sdf</pre></td>
+<td><pre>/sbin/zpool add tank cache /dev/sdc</pre></td>
+<td></td>
+</tr>
+<tr>
+<th><a href="4.3/result.html">4.3</a></th>
+<td><pre>/sbin/zpool create tank raidz2 /dev/sda /dev/sdb /dev/sde /dev/sdf</pre></td>
+<td><pre>/sbin/zpool add tank cache /dev/sdc /dev/sdg</pre></td>
+<td></td>
+</tr>
+<tr>
+<th><a href="4.4/result.html">4.4</a></th>
+<td><pre>/sbin/zpool create tank raidz2 /dev/sda /dev/sdb /dev/sde /dev/sdf</pre></td>
+<td><pre>/sbin/zpool add tank cache /dev/sdc /dev/sdg</pre></td>
+<td><pre>/sbin/zpool add -f tank log /dev/sdd</pre></td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="container-fluid">
+<div class="center row">&copy; 2015 Philipp Haussleiter</div>
+</div>
+
+</body>
+</html>

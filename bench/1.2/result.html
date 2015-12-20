@@ -38,7 +38,7 @@ back to Index
 <kbd>echo "init " && date</kbd>
 <br />
 <samp><pre>init 
-Sat Dec 19 20:56:05 CET 2015
+Sat Dec 19 23:01:46 CET 2015
 </pre></samp>
 </p>
 <a class="anchor" aria-hidden="true" id="1.2_pool_setup"></a> <h2><small><a href="#1.2_pool_setup">#</a></small>Pool Setup</h2>
@@ -82,32 +82,208 @@ tank   216K  1.76T    96K  /tank
 <kbd>echo "start " && date</kbd>
 <br />
 <samp><pre>start 
-Sat Dec 19 20:56:06 CET 2015
+Sat Dec 19 23:01:47 CET 2015
 </pre></samp>
 </p>
 <p class="cmd">
 <kbd>(top -b -n 1 | head -n 20) </kbd>
 <br />
-<samp><pre>top - 20:56:06 up  5:06,  1 user,  load average: 1.15, 1.68, 1.40
-Tasks: 733 total,   2 running, 731 sleeping,   0 stopped,   0 zombie
-%Cpu(s):  0.0 us,  1.0 sy,  0.0 ni, 96.0 id,  2.9 wa,  0.0 hi,  0.0 si,  0.0 st
-KiB Mem:   8163292 total,   713836 used,  7449456 free,    18936 buffers
-KiB Swap:   286716 total,        0 used,   286716 free.    77576 cached Mem
+<samp><pre>top - 23:01:47 up 23 min,  0 users,  load average: 1.53, 1.68, 1.08
+Tasks: 729 total,   1 running, 728 sleeping,   0 stopped,   0 zombie
+%Cpu(s):  0.0 us,  1.6 sy,  0.0 ni, 93.7 id,  4.6 wa,  0.0 hi,  0.0 si,  0.0 st
+KiB Mem:   8163292 total,   606280 used,  7557012 free,    17964 buffers
+KiB Swap:   286716 total,        0 used,   286716 free.    69184 cached Mem
 
   PID USER      PR  NI    VIRT    RES    SHR S  %CPU %MEM     TIME+ COMMAND
- 6805 root      20   0   26844   3308   2468 R  11.8  0.0   0:00.03 top
-    1 root      20   0   33604   4020   2628 S   0.0  0.0   0:02.80 init
-    2 root      20   0       0      0      0 S   0.0  0.0   0:00.05 kthreadd
-    3 root      20   0       0      0      0 S   0.0  0.0   0:00.22 ksoftirqd/0
+ 2289 root      20   0   51444   3024   2376 S   6.1  0.0   0:00.01 systemd-ud+
+ 2698 root      20   0   26844   3396   2560 R   6.1  0.0   0:00.02 top
+    1 root      20   0   33492   4068   2684 S   0.0  0.0   0:03.18 init
+    2 root      20   0       0      0      0 S   0.0  0.0   0:00.01 kthreadd
+    3 root      20   0       0      0      0 S   0.0  0.0   0:00.05 ksoftirqd/0
+    4 root      20   0       0      0      0 S   0.0  0.0   0:00.00 kworker/0:0
     5 root       0 -20       0      0      0 S   0.0  0.0   0:00.00 kworker/0:+
     6 root      20   0       0      0      0 S   0.0  0.0   0:00.00 kworker/u6+
-    8 root      20   0       0      0      0 R   0.0  0.0   0:01.19 rcu_sched
-    9 root      20   0       0      0      0 S   0.0  0.0   0:00.05 rcuos/0
-   10 root      20   0       0      0      0 S   0.0  0.0   0:00.14 rcuos/1
-   11 root      20   0       0      0      0 S   0.0  0.0   0:00.08 rcuos/2
-   12 root      20   0       0      0      0 S   0.0  0.0   0:00.25 rcuos/3
-   13 root      20   0       0      0      0 S   0.0  0.0   0:00.04 rcuos/4
-   14 root      20   0       0      0      0 S   0.0  0.0   0:00.26 rcuos/5
+    8 root      20   0       0      0      0 S   0.0  0.0   0:00.22 rcu_sched
+    9 root      20   0       0      0      0 S   0.0  0.0   0:00.01 rcuos/0
+   10 root      20   0       0      0      0 S   0.0  0.0   0:00.01 rcuos/1
+   11 root      20   0       0      0      0 S   0.0  0.0   0:00.01 rcuos/2
+   12 root      20   0       0      0      0 S   0.0  0.0   0:00.01 rcuos/3
 </pre></samp>
 </p>
 <p class="cmd">
+<kbd>/usr/sbin/bonnie++ -d /tank -r 8192 -n 128 -u root >> bench/1.2/boonie.csv</kbd>
+<br />
+<kbd>/usr/bin/bon_csv2html bench/1.2/boonie.csv > bench/1.2/boonie.html</kbd>
+<br />
+<table border="3" cellpadding="2" cellspacing="1"><tr><td colspan="2" class="header"><font size=+1><b>Version 1.97</b></font></td><td colspan="6" class="header"><font size=+2><b>Sequential Output</b></font></td><td colspan="4" class="header"><font size=+2><b>Sequential Input</b></font></td><td colspan="2" rowspan="2" class="header"><font size=+2><b>Random<br>Seeks</b></font></td><td colspan="1" class="header"></td><td colspan="6" class="header"><font size=+2><b>Sequential Create</b></font></td><td colspan="6" class="header"><font size=+2><b>Random Create</b></font></td></tr>
+<tr><td></td><td>Size</td><td colspan="2">Per Char</td><td colspan="2">Block</td><td colspan="2">Rewrite</td><td colspan="2">Per Char</td><td colspan="2">Block</td><td>Num Files</td><td colspan="2">Create</td><td colspan="2">Read</td><td colspan="2">Delete</td><td colspan="2">Create</td><td colspan="2">Read</td><td colspan="2">Delete</td></tr><tr><td colspan="2"></td><td class="ksec"><font size=-2>K/sec</font></td><td class="ksec"><font size=-2>% CPU</font></td><td class="ksec"><font size=-2>K/sec</font></td><td class="ksec"><font size=-2>% CPU</font></td><td class="ksec"><font size=-2>K/sec</font></td><td class="ksec"><font size=-2>% CPU</font></td><td class="ksec"><font size=-2>K/sec</font></td><td class="ksec"><font size=-2>% CPU</font></td><td class="ksec"><font size=-2>K/sec</font></td><td class="ksec"><font size=-2>% CPU</font></td><td class="ksec"><font size=-2>/sec</font></td><td class="ksec"><font size=-2>% CPU</font></td><td colspan="1"></td><td class="ksec"><font size=-2>/sec</font></td><td class="ksec"><font size=-2>% CPU</font></td><td class="ksec"><font size=-2>/sec</font></td><td class="ksec"><font size=-2>% CPU</font></td><td class="ksec"><font size=-2>/sec</font></td><td class="ksec"><font size=-2>% CPU</font></td><td class="ksec"><font size=-2>/sec</font></td><td class="ksec"><font size=-2>% CPU</font></td><td class="ksec"><font size=-2>/sec</font></td><td class="ksec"><font size=-2>% CPU</font></td><td class="ksec"><font size=-2>/sec</font></td><td class="ksec"><font size=-2>% CPU</font></td></tr>
+<tr><td rowspan="2" bgcolor="#FFFFFF" class="rowheader"><font size=+1>dl380</td><td class="size" bgcolor="#FFFFFF">16G</td><td>143</td><td>99</td><td>196215</td><td>40</td><td>83550</td><td>16</td><td>434</td><td>97</td><td>170409</td><td>11</td><td>260.4</td><td>15</td><td class="size" bgcolor="#FFFFFF">128</td><td>16557</td><td>99</td><td>+++++</td><td>+++</td><td>18140</td><td>99</td><td>15575</td><td>99</td><td>+++++</td><td>+++</td><td>18045</td><td>99</td></tr>
+<tr><td class="size" bgcolor="#FFFFFF" colspan="1">Latency</td><td colspan="2">58958us</td><td colspan="2">33124us</td><td colspan="2">1308ms</td><td colspan="2">149ms</td><td colspan="2">1056ms</td><td colspan="2">332ms</td><td class="size" bgcolor="#FFFFFF" colspan="1">Latency</td><td colspan="2">164ms</td><td colspan="2">494us</td><td colspan="2">772us</td><td colspan="2">77647us</td><td colspan="2">180us</td><td colspan="2">1216us</td></tr>
+</table>
+</p>
+<p class="cmd">
+<kbd>(top -b -n 1 | head -n 20) </kbd>
+<br />
+<samp><pre>top - 23:09:47 up 31 min,  0 users,  load average: 2.21, 1.79, 1.36
+Tasks: 727 total,   2 running, 725 sleeping,   0 stopped,   0 zombie
+%Cpu(s):  0.0 us,  2.1 sy,  0.0 ni, 92.9 id,  4.9 wa,  0.0 hi,  0.0 si,  0.0 st
+KiB Mem:   8163292 total,   929148 used,  7234144 free,    17780 buffers
+KiB Swap:   286716 total,        0 used,   286716 free.    69420 cached Mem
+
+  PID USER      PR  NI    VIRT    RES    SHR S  %CPU %MEM     TIME+ COMMAND
+ 2726 root      20   0   26844   3280   2444 R   6.1  0.0   0:00.02 top
+    1 root      20   0   33492   4068   2684 S   0.0  0.0   0:03.18 init
+    2 root      20   0       0      0      0 S   0.0  0.0   0:00.01 kthreadd
+    3 root      20   0       0      0      0 S   0.0  0.0   0:00.06 ksoftirqd/0
+    4 root      20   0       0      0      0 S   0.0  0.0   0:00.00 kworker/0:0
+    5 root       0 -20       0      0      0 S   0.0  0.0   0:00.00 kworker/0:+
+    6 root      20   0       0      0      0 S   0.0  0.0   0:00.00 kworker/u6+
+    8 root      20   0       0      0      0 R   0.0  0.0   0:00.28 rcu_sched
+    9 root      20   0       0      0      0 S   0.0  0.0   0:00.04 rcuos/0
+   10 root      20   0       0      0      0 S   0.0  0.0   0:00.02 rcuos/1
+   11 root      20   0       0      0      0 S   0.0  0.0   0:00.01 rcuos/2
+   12 root      20   0       0      0      0 S   0.0  0.0   0:00.01 rcuos/3
+   13 root      20   0       0      0      0 S   0.0  0.0   0:00.02 rcuos/4
+</pre></samp>
+</p>
+<p class="cmd">
+<kbd>echo "end " && date</kbd>
+<br />
+<samp><pre>end 
+Sat Dec 19 23:09:47 CET 2015
+</pre></samp>
+</p>
+<a class="anchor" aria-hidden="true" id="1.2_dd"></a> <h2><small><a href="#1.2_dd">#</a></small>DD</h2>
+<p class="cmd">
+<kbd>echo "start " && date</kbd>
+<br />
+<samp><pre>start 
+Sat Dec 19 23:09:47 CET 2015
+</pre></samp>
+</p>
+<p class="cmd">
+<kbd>(top -b -n 1 | head -n 20) </kbd>
+<br />
+<samp><pre>top - 23:09:47 up 31 min,  0 users,  load average: 2.21, 1.79, 1.36
+Tasks: 727 total,   2 running, 725 sleeping,   0 stopped,   0 zombie
+%Cpu(s):  0.0 us,  2.1 sy,  0.0 ni, 92.9 id,  4.9 wa,  0.0 hi,  0.0 si,  0.0 st
+KiB Mem:   8163292 total,   928360 used,  7234932 free,    17780 buffers
+KiB Swap:   286716 total,        0 used,   286716 free.    69428 cached Mem
+
+  PID USER      PR  NI    VIRT    RES    SHR S  %CPU %MEM     TIME+ COMMAND
+ 2734 root      20   0   26844   3452   2616 R  11.9  0.0   0:00.02 top
+    1 root      20   0   33492   4068   2684 S   0.0  0.0   0:03.18 init
+    2 root      20   0       0      0      0 S   0.0  0.0   0:00.01 kthreadd
+    3 root      20   0       0      0      0 S   0.0  0.0   0:00.06 ksoftirqd/0
+    4 root      20   0       0      0      0 S   0.0  0.0   0:00.00 kworker/0:0
+    5 root       0 -20       0      0      0 S   0.0  0.0   0:00.00 kworker/0:+
+    6 root      20   0       0      0      0 S   0.0  0.0   0:00.00 kworker/u6+
+    8 root      20   0       0      0      0 R   0.0  0.0   0:00.28 rcu_sched
+    9 root      20   0       0      0      0 S   0.0  0.0   0:00.04 rcuos/0
+   10 root      20   0       0      0      0 S   0.0  0.0   0:00.02 rcuos/1
+   11 root      20   0       0      0      0 S   0.0  0.0   0:00.01 rcuos/2
+   12 root      20   0       0      0      0 S   0.0  0.0   0:00.01 rcuos/3
+   13 root      20   0       0      0      0 S   0.0  0.0   0:00.02 rcuos/4
+</pre></samp>
+</p>
+<p class="cmd">
+<kbd>(time sh -c "dd if=/dev/zero of=/tank/tmp bs=4k count=2097152 && sync") </kbd>
+<br />
+<samp><pre>2097152+0 records in
+2097152+0 records out
+8589934592 bytes (8.6 GB) copied, 37.7478 s, 228 MB/s
+0.65user 25.56system 0:41.29elapsed 63%CPU (0avgtext+0avgdata 2040maxresident)k
+0inputs+16777216outputs (0major+285minor)pagefaults 0swaps
+</pre></samp>
+</p>
+<p class="cmd">
+<kbd>(top -b -n 1 | head -n 20) </kbd>
+<br />
+<samp><pre>top - 23:10:28 up 31 min,  0 users,  load average: 3.16, 2.13, 1.49
+Tasks: 727 total,   1 running, 726 sleeping,   0 stopped,   0 zombie
+%Cpu(s):  0.0 us,  2.3 sy,  0.0 ni, 92.7 id,  5.0 wa,  0.0 hi,  0.0 si,  0.0 st
+KiB Mem:   8163292 total,  4843388 used,  3319904 free,    17796 buffers
+KiB Swap:   286716 total,        0 used,   286716 free.    69436 cached Mem
+
+  PID USER      PR  NI    VIRT    RES    SHR S  %CPU %MEM     TIME+ COMMAND
+ 2743 root      20   0   26844   3416   2580 R  12.1  0.0   0:00.02 top
+    8 root      20   0       0      0      0 S   6.0  0.0   0:00.29 rcu_sched
+ 2426 root       0 -20       0      0      0 S   6.0  0.0   0:00.29 z_wr_int_0
+    1 root      20   0   33492   4068   2684 S   0.0  0.0   0:03.18 init
+    2 root      20   0       0      0      0 S   0.0  0.0   0:00.01 kthreadd
+    3 root      20   0       0      0      0 S   0.0  0.0   0:00.06 ksoftirqd/0
+    4 root      20   0       0      0      0 S   0.0  0.0   0:00.00 kworker/0:0
+    5 root       0 -20       0      0      0 S   0.0  0.0   0:00.00 kworker/0:+
+    6 root      20   0       0      0      0 S   0.0  0.0   0:00.00 kworker/u6+
+    9 root      20   0       0      0      0 S   0.0  0.0   0:00.04 rcuos/0
+   10 root      20   0       0      0      0 S   0.0  0.0   0:00.02 rcuos/1
+   11 root      20   0       0      0      0 S   0.0  0.0   0:00.01 rcuos/2
+   12 root      20   0       0      0      0 S   0.0  0.0   0:00.01 rcuos/3
+</pre></samp>
+</p>
+<p class="cmd">
+<kbd>(time sh -c "dd if=/tank/tmp of=/dev/null bs=4k") </kbd>
+<br />
+<samp><pre>2097152+0 records in
+2097152+0 records out
+8589934592 bytes (8.6 GB) copied, 42.5066 s, 202 MB/s
+0.35user 7.77system 0:42.50elapsed 19%CPU (0avgtext+0avgdata 1968maxresident)k
+16929480inputs+0outputs (0major+207minor)pagefaults 0swaps
+</pre></samp>
+</p>
+<p class="cmd">
+<kbd>(top -b -n 1 | head -n 20) </kbd>
+<br />
+<samp><pre>top - 23:11:11 up 32 min,  0 users,  load average: 2.16, 2.00, 1.48
+Tasks: 727 total,   1 running, 726 sleeping,   0 stopped,   0 zombie
+%Cpu(s):  0.0 us,  2.3 sy,  0.0 ni, 92.7 id,  5.0 wa,  0.0 hi,  0.0 si,  0.0 st
+KiB Mem:   8163292 total,  4824352 used,  3338940 free,    17812 buffers
+KiB Swap:   286716 total,        0 used,   286716 free.    69440 cached Mem
+
+  PID USER      PR  NI    VIRT    RES    SHR S  %CPU %MEM     TIME+ COMMAND
+ 2751 root      20   0   26844   3416   2580 R  12.0  0.0   0:00.02 top
+    1 root      20   0   33492   4068   2684 S   0.0  0.0   0:03.18 init
+    2 root      20   0       0      0      0 S   0.0  0.0   0:00.01 kthreadd
+    3 root      20   0       0      0      0 S   0.0  0.0   0:00.06 ksoftirqd/0
+    4 root      20   0       0      0      0 S   0.0  0.0   0:00.00 kworker/0:0
+    5 root       0 -20       0      0      0 S   0.0  0.0   0:00.00 kworker/0:+
+    6 root      20   0       0      0      0 S   0.0  0.0   0:00.00 kworker/u6+
+    8 root      20   0       0      0      0 S   0.0  0.0   0:00.29 rcu_sched
+    9 root      20   0       0      0      0 S   0.0  0.0   0:00.04 rcuos/0
+   10 root      20   0       0      0      0 S   0.0  0.0   0:00.02 rcuos/1
+   11 root      20   0       0      0      0 S   0.0  0.0   0:00.01 rcuos/2
+   12 root      20   0       0      0      0 S   0.0  0.0   0:00.01 rcuos/3
+   13 root      20   0       0      0      0 S   0.0  0.0   0:00.03 rcuos/4
+</pre></samp>
+</p>
+<p class="cmd">
+<kbd>echo "end " && date</kbd>
+<br />
+<samp><pre>end 
+Sat Dec 19 23:11:11 CET 2015
+</pre></samp>
+</p>
+<a class="anchor" aria-hidden="true" id="1.2_cleanup"></a> <h2><small><a href="#1.2_cleanup">#</a></small>Cleanup</h2>
+<p class="cmd">
+<kbd>/sbin/zpool destroy -f tank</kbd>
+<br />
+<samp><pre></pre></samp>
+</p>
+<p class="cmd">
+<kbd>echo "done " && date</kbd>
+<br />
+<samp><pre>done 
+Sat Dec 19 23:11:11 CET 2015
+</pre></samp>
+</p>
+</div>
+<div class="col-md-2">
+</div>
+</div>
+</div>
+<div class="container-fluid">
+<div class="center row">&copy; 2015 Philipp Haussleiter</div>
+</div>
+
+</body>
+</html>
