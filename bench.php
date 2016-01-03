@@ -1,12 +1,14 @@
 #!/usr/bin/php
 <?php
+
 // this should be 2x of RAM
 $SIZE_GB=16;
 $SIZE_MB=$SIZE_GB*1024;
 $SIZE_B=$SIZE_MB*1024;
 $SIZE_B_AS_4k=$SIZE_B/4;
-
-$DISK_INDEX_CMD = "fdisk -l | grep Disk";
+$HDPARM = "hdparm -tT --direct";
+$DISK_INDEX_CMD = "fdisk -l 2>&1 | grep \"^Disk\"";
+$DISK_LIST_CMD = "fdisk -l 2>/dev/null | grep \"Disk \/\" | grep -v \"\/dev\/md\" | awk '{print $2}' | sed -e 's/://g'";
 $TANK_SIZE_CMD = "du -sh /tank";
 $DATE = "date";
 $FREE = "free -h";
@@ -30,6 +32,20 @@ $ZPOOL_DESTROY_CMD = "destroy -f tank";
 $ZPOOL_STATUS = "status";
 $ZPOOL_LIST = "list";
 $ZFS_LIST = "list";
+
+$TOOLS = array(
+	"zfs",
+	"zpool",
+	"dmesg",
+	"hdparm",
+	"lspci",
+	"free",
+	"fdisk",
+	"du",
+	"bonnie++"
+);
+
+$DISKS = getDisks();
 
 $ZPOOL_CREATE_CMDS = array(
 	"1.1" => "create tank /dev/sda",
@@ -77,6 +93,10 @@ $ZPOOL_LOG = array(
 	"4.4" => "add -f tank log /dev/sdd"
 );
 
+
+$COPY = "&copy; 2016 Philipp Haussleiter";
+$RUN_BENCH = true;
+
 ##############################################
 #
 #	Config End
@@ -99,6 +119,8 @@ addSystemFile();
 fwrite($indexFile, "<p><a href=\"sys/system.html\">...more</a></p>\n");
 fwrite($indexFile, "<p><kbd>Test Size</kbd><br /><samp>".$SIZE_GB." GB</samp></p>\n");
 closeChapter($indexFile);
+
+addDiskBenchmark($indexFile);
 
 openChapter($indexFile, "Index", "Benchmarks");
 fwrite($indexFile, "<dl>\n");
@@ -128,22 +150,24 @@ foreach ($ZPOOL_CREATE_CMDS as $key => $cmd) {
 		$poolCmds .= $ZPOOL." ".$ZPOOL_LOG[$key]."\n";
 	}
 	runCmd($ZPOOL." ".$ZPOOL_STATUS, $benchFile);
+	shell_exec($ZPOOL." ".$ZPOOL_STATUS." > bench/".$key."/zpool.status.txt");
 	runCmd($ZPOOL." ".$ZPOOL_LIST, $benchFile);
 	runCmd($ZFS." ".$ZFS_LIST, $benchFile);		
 	closeChapter($benchFile);
 
-	runBoonie($benchFile, $key);
+	if($RUN_BENCH){
+		runBoonie($benchFile, $key);
 
-	openChapter($benchFile, $key, "DD");
-	runCmd("echo \"start \" && date", $benchFile);
-	runCmd($TOP, $benchFile);
-	runCmd($DD_WRITE, $benchFile);
-	runCmd($TOP, $benchFile);
-	runCmd($DD_READ, $benchFile);
-	runCmd($TOP, $benchFile);
-	runCmd("echo \"end \" && date", $benchFile);
-	closeChapter($benchFile);
-
+		openChapter($benchFile, $key, "DD");
+		runCmd("echo \"start \" && date", $benchFile);
+		runCmd($TOP, $benchFile);
+		runCmd($DD_WRITE, $benchFile);
+		runCmd($TOP, $benchFile);
+		runCmd($DD_READ, $benchFile);
+		runCmd($TOP, $benchFile);
+		runCmd("echo \"end \" && date", $benchFile);
+		closeChapter($benchFile);
+	}
 	openChapter($benchFile, $key, "Cleanup");
 	runCmd($ZPOOL." ".$ZPOOL_DESTROY_CMD, $benchFile);
 	runCmd("echo \"done \" && date", $benchFile);
@@ -165,6 +189,16 @@ closeChapter($indexFile);
 addFooter($indexFile);
 fclose($indexFile);
 
+
+function checkTools() {
+	global $TOOLS;
+}
+
+function getDisks() {
+	global $DISK_LIST_CMD;
+	$output = shell_exec($DISK_LIST_CMD);
+	return split("\n", trim($output));
+}
 
 function runBoonie($benchFile, $key) {
 	global $TOP, $BOONIE, $BON_CSV2HTML, $CAT;
@@ -195,6 +229,11 @@ function runCmd($cmd, $benchFile) {
 	fwrite($benchFile, "<samp><pre>".$output."</pre></samp>\n</p>\n");
 }
 
+function writeOutput($cmd, $output, $benchFile) {
+	fwrite($benchFile, "<p class=\"cmd\">\n<kbd>".$cmd."</kbd>\n<br />\n");
+	fwrite($benchFile, "<samp><pre>".$output."</pre></samp>\n</p>\n");
+}
+
 function addHeader($benchFile, $key) {
 	fwrite($benchFile, "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<title>Benchmark ".$key."</title>\n");
 	fwrite($benchFile, "\n<!-- Latest compiled and minified CSS -->\n");
@@ -210,11 +249,12 @@ function addHeader($benchFile, $key) {
 }
 
 function addFooter($benchFile) {
+	global $COPY;
 	fwrite($benchFile, "</div>\n");
 	fwrite($benchFile, "</div>\n");
 	fwrite($benchFile, "</div>\n");
 	fwrite($benchFile, "<div class=\"container-fluid\">\n");
-	fwrite($benchFile, "<div class=\"center row\">&copy; 2015 Philipp Haussleiter</div>\n");
+	fwrite($benchFile, "<div class=\"center row\">".$COPY."</div>\n");
 	fwrite($benchFile, "</div>\n");
 	fwrite($benchFile, "\n</body>\n</html>\n");
 }
@@ -250,13 +290,14 @@ function addSubHeader($benchFile, $key, $nav) {
 }
 
 function addSubFooter($benchFile) {
+	global $COPY;
 	fwrite($benchFile, "</div>\n");
 	fwrite($benchFile, "<div class=\"col-md-2\">\n");
 	fwrite($benchFile, "</div>\n");
 	fwrite($benchFile, "</div>\n");
 	fwrite($benchFile, "</div>\n");
 	fwrite($benchFile, "<div class=\"container-fluid\">\n");
-	fwrite($benchFile, "<div class=\"center row\">&copy; 2015 Philipp Haussleiter</div>\n");
+	fwrite($benchFile, "<div class=\"center row\">".$COPY."</div>\n");
 	fwrite($benchFile, "</div>\n");
 	fwrite($benchFile, "\n</body>\n</html>\n");
 }
@@ -294,24 +335,12 @@ function createTestMatrix($indexFile) {
 	fwrite($indexFile, "<table class=\"table table-striped\">\n");
 	fwrite($indexFile, "<tr>\n");
 	fwrite($indexFile, "<th>Benchmark</th>\n");
-	fwrite($indexFile, "<th>Pool</th>\n");
-	fwrite($indexFile, "<th>Cache</th>\n");
-	fwrite($indexFile, "<th>Log</th>\n");				
+	fwrite($indexFile, "<th>Pool</th>\n");				
 	fwrite($indexFile, "</tr>\n");
 	foreach ($ZPOOL_CREATE_CMDS as $key => $cmd) {
 		fwrite($indexFile, "<tr>\n");
 		fwrite($indexFile, "<th><a href=\"".$key."/result.html\">".$key."</a></th>\n");
-		fwrite($indexFile, "<td><pre>".$ZPOOL." ".$cmd."</pre></td>\n");
-		if(isset($ZPOOL_CACHE[$key])) {
-			fwrite($indexFile, "<td><pre>".$ZPOOL." ".$ZPOOL_CACHE[$key]."</pre></td>\n");
-		} else {
-			fwrite($indexFile, "<td></td>\n");	
-		}
-		if(isset($ZPOOL_LOG[$key])) {
-			fwrite($indexFile, "<td><pre>".$ZPOOL." ".$ZPOOL_LOG[$key]."</pre></td>\n");
-		} else {
-			fwrite($indexFile, "<td></td>\n");	
-		}
+		fwrite($indexFile, "<td><pre>".shell_exec("cat bench/".$key."/zpool.status.txt")."</pre></td>\n");
 		fwrite($indexFile, "</tr>\n");
 	}
 	fwrite($indexFile, "</table>\n");
@@ -339,10 +368,32 @@ function addSystemFile() {
 	fclose($sysFile);
 }
 
+function addDiskBenchmark($indexFile){
+	global $DISKS, $HDPARM;
+	openChapter($indexFile, "Index", "Disks");
+	fwrite($indexFile, "<table class=\"table table-striped\">\n");
+	fwrite($indexFile, "<tr>\n");
+	fwrite($indexFile, "<th>Disk</th>\n");
+	fwrite($indexFile, "<th>Benchmark</th>\n");				
+	fwrite($indexFile, "</tr>\n");
+	foreach ($DISKS as $disk){
+		fwrite($indexFile, "<tr>\n");
+		fwrite($indexFile, "<th>".$disk."</th>\n");
+		fwrite($indexFile, "<td><pre>".shell_exec($HDPARM." ".$disk)."</pre></td>\n");
+		fwrite($indexFile, "</tr>\n");
+	}
+	fwrite($indexFile, "</table>\n");
+	closeChapter($indexFile);
+}
+
 function splitBoonieOutput($output) {
 	$start = strripos($output, "<table");
 	$end = strripos($output, "</table>");
 	return $start && $end ? substr($output, $start, $end-$start)."</table>" : "";
 }
 
+function startsWith($haystack, $needle) {
+    // search backwards starting from haystack length characters from the end
+    return $needle === "" || strrpos($haystack, $needle, -strlen($haystack)) !== FALSE;
+}
 ?>
