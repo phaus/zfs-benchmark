@@ -19,7 +19,7 @@
 <p class="cmd">
 <kbd>date</kbd>
 <br />
-<samp><pre>Sat Dec 19 22:46:13 CET 2015
+<samp><pre>So 3. Jan 20:45:12 CET 2016
 </pre></samp>
 </p>
 <p class="cmd">
@@ -37,41 +37,98 @@
 <p class="cmd">
 <kbd>free -h</kbd>
 <br />
-<samp><pre>             total       used       free     shared    buffers     cached
-Mem:          7.8G       278M       7.5G       884K        16M        65M
--/+ buffers/cache:       196M       7.6G
-Swap:         279M         0B       279M
+<samp><pre>             Gesamt Belegt Frei Gemeinsam Puffer Cache
+Speicher:       7,8G       720M       7,1G       896K        22M       364M
+-/+ Puffer/Cache:       333M       7,5G
+Auslagerungsdatei:       279M         0B       279M
 </pre></samp>
 </p>
 <p class="cmd">
-<kbd>fdisk -l | grep Disk</kbd>
+<kbd>fdisk -l 2>&1 | grep "^Disk"</kbd>
 <br />
 <samp><pre>Disk /dev/sda: 1000.2 GB, 1000171331584 bytes
-Disk identifier: 0x00000000
-Disk /dev/sdc: 256.0 GB, 256022937600 bytes
-Disk identifier: 0x00000000
 Disk /dev/sdb: 1000.2 GB, 1000171331584 bytes
-Disk identifier: 0x00000000
+Disk /dev/sdc: 256.0 GB, 256022937600 bytes
 Disk /dev/sdd: 250.0 GB, 250023444480 bytes
-Disk identifier: 0x00000000
 Disk /dev/sde: 1000.2 GB, 1000171331584 bytes
-Disk identifier: 0x00000000
-Disk /dev/sdf: 1000.2 GB, 1000171331584 bytes
-Disk identifier: 0x00000000
 Disk /dev/sdg: 256.0 GB, 256022937600 bytes
-Disk identifier: 0x00000000
-Disk /dev/sdh: 7948 MB, 7948206080 bytes
-Disk identifier: 0x000de753
-Disk /dev/mapper/dl380--vg-root: 2428 MB, 2428502016 bytes
-Disk identifier: 0x00000000
-Disk /dev/mapper/dl380--vg-swap_1: 293 MB, 293601280 bytes
-Disk identifier: 0x00000000
-Disk /dev/mapper/dl380--vg-home: 4966 MB, 4966055936 bytes
-Disk identifier: 0x00000000
+Disk /dev/sdf: 1000.2 GB, 1000171331584 bytes
+Disk /dev/sdi: 250.0 GB, 250023444480 bytes
 </pre></samp>
 </p>
 <p><a href="sys/system.html">...more</a></p>
-<p><kbd>Test Size</kbd><br /><samp>8 GB</samp></p>
+<p><kbd>Test Size</kbd><br /><samp>16 GB</samp></p>
+<a class="anchor" aria-hidden="true" id="index_disks"></a> <h2><small><a href="#index_disks">#</a></small>Disks</h2>
+<table class="table table-striped">
+<tr>
+<th>Disk</th>
+<th>Benchmark</th>
+</tr>
+<tr>
+<th>/dev/sda</th>
+<td><pre>
+/dev/sda:
+ Timing O_DIRECT cached reads:   2354 MB in  2.00 seconds = 1176.27 MB/sec
+ Timing O_DIRECT disk reads: 326 MB in  3.00 seconds = 108.49 MB/sec
+</pre></td>
+</tr>
+<tr>
+<th>/dev/sdb</th>
+<td><pre>
+/dev/sdb:
+ Timing O_DIRECT cached reads:   1596 MB in  2.00 seconds = 797.95 MB/sec
+ Timing O_DIRECT disk reads: 296 MB in  3.00 seconds =  98.60 MB/sec
+</pre></td>
+</tr>
+<tr>
+<th>/dev/sdc</th>
+<td><pre>
+/dev/sdc:
+ Timing O_DIRECT cached reads:   1566 MB in  2.00 seconds = 782.20 MB/sec
+ Timing O_DIRECT disk reads: 730 MB in  3.00 seconds = 243.16 MB/sec
+</pre></td>
+</tr>
+<tr>
+<th>/dev/sdd</th>
+<td><pre>
+/dev/sdd:
+ Timing O_DIRECT cached reads:   1524 MB in  2.00 seconds = 761.66 MB/sec
+ Timing O_DIRECT disk reads: 736 MB in  3.01 seconds = 244.78 MB/sec
+</pre></td>
+</tr>
+<tr>
+<th>/dev/sde</th>
+<td><pre>
+/dev/sde:
+ Timing O_DIRECT cached reads:   1332 MB in  2.00 seconds = 665.98 MB/sec
+ Timing O_DIRECT disk reads: 320 MB in  3.01 seconds = 106.42 MB/sec
+</pre></td>
+</tr>
+<tr>
+<th>/dev/sdg</th>
+<td><pre>
+/dev/sdg:
+ Timing O_DIRECT cached reads:   1548 MB in  2.00 seconds = 773.64 MB/sec
+ Timing O_DIRECT disk reads: 728 MB in  3.00 seconds = 242.33 MB/sec
+</pre></td>
+</tr>
+<tr>
+<th>/dev/sdf</th>
+<td><pre>
+/dev/sdf:
+ Timing O_DIRECT cached reads:   1546 MB in  2.00 seconds = 772.65 MB/sec
+ Timing O_DIRECT disk reads: 324 MB in  3.01 seconds = 107.57 MB/sec
+</pre></td>
+</tr>
+<tr>
+<th>/dev/sdi</th>
+<td><pre>
+/dev/sdi:
+ Timing O_DIRECT cached reads:   1514 MB in  2.00 seconds = 756.24 MB/sec
+ Timing O_DIRECT disk reads: 734 MB in  3.00 seconds = 244.34 MB/sec
+</pre></td>
+</tr>
+</table>
 <a class="anchor" aria-hidden="true" id="index_benchmarks"></a> <h2><small><a href="#index_benchmarks">#</a></small>Benchmarks</h2>
 <dl>
 	<dt><a href="1.1/result.html">1. Benchmark:</a></dt>
@@ -149,129 +206,377 @@ Disk identifier: 0x00000000
 <tr>
 <th>Benchmark</th>
 <th>Pool</th>
-<th>Cache</th>
-<th>Log</th>
 </tr>
 <tr>
 <th><a href="1.1/result.html">1.1</a></th>
-<td><pre>/sbin/zpool create tank /dev/sda</pre></td>
-<td></td>
-<td></td>
+<td><pre>  pool: tank
+ state: ONLINE
+  scan: none requested
+config:
+
+	NAME        STATE     READ WRITE CKSUM
+	tank        ONLINE       0     0     0
+	  sda       ONLINE       0     0     0
+
+errors: No known data errors
+</pre></td>
 </tr>
 <tr>
 <th><a href="1.2/result.html">1.2</a></th>
-<td><pre>/sbin/zpool create tank /dev/sda /dev/sdb</pre></td>
-<td></td>
-<td></td>
+<td><pre>  pool: tank
+ state: ONLINE
+  scan: none requested
+config:
+
+	NAME        STATE     READ WRITE CKSUM
+	tank        ONLINE       0     0     0
+	  sda       ONLINE       0     0     0
+	  sdb       ONLINE       0     0     0
+
+errors: No known data errors
+</pre></td>
 </tr>
 <tr>
 <th><a href="1.3/result.html">1.3</a></th>
-<td><pre>/sbin/zpool create tank /dev/sda /dev/sdb /dev/sde</pre></td>
-<td></td>
-<td></td>
+<td><pre>  pool: tank
+ state: ONLINE
+  scan: none requested
+config:
+
+	NAME        STATE     READ WRITE CKSUM
+	tank        ONLINE       0     0     0
+	  sda       ONLINE       0     0     0
+	  sdb       ONLINE       0     0     0
+	  sde       ONLINE       0     0     0
+
+errors: No known data errors
+</pre></td>
 </tr>
 <tr>
 <th><a href="1.4/result.html">1.4</a></th>
-<td><pre>/sbin/zpool create tank /dev/sda /dev/sdb /dev/sde /dev/sdf</pre></td>
-<td></td>
-<td></td>
+<td><pre>  pool: tank
+ state: ONLINE
+  scan: none requested
+config:
+
+	NAME        STATE     READ WRITE CKSUM
+	tank        ONLINE       0     0     0
+	  sda       ONLINE       0     0     0
+	  sdb       ONLINE       0     0     0
+	  sde       ONLINE       0     0     0
+	  sdf       ONLINE       0     0     0
+
+errors: No known data errors
+</pre></td>
 </tr>
 <tr>
 <th><a href="1.5/result.html">1.5</a></th>
-<td><pre>/sbin/zpool create tank /dev/sda /dev/sdb /dev/sdc /dev/sdd /dev/sde /dev/sdf /dev/sdg</pre></td>
-<td></td>
-<td></td>
+<td><pre>  pool: tank
+ state: ONLINE
+  scan: none requested
+config:
+
+	NAME        STATE     READ WRITE CKSUM
+	tank        ONLINE       0     0     0
+	  sda       ONLINE       0     0     0
+	  sdb       ONLINE       0     0     0
+	  sdc       ONLINE       0     0     0
+	  sdd       ONLINE       0     0     0
+	  sde       ONLINE       0     0     0
+	  sdf       ONLINE       0     0     0
+	  sdg       ONLINE       0     0     0
+
+errors: No known data errors
+</pre></td>
 </tr>
 <tr>
 <th><a href="2.1/result.html">2.1</a></th>
-<td><pre>/sbin/zpool create tank mirror /dev/sda /dev/sdb</pre></td>
-<td></td>
-<td></td>
+<td><pre>  pool: tank
+ state: ONLINE
+  scan: none requested
+config:
+
+	NAME        STATE     READ WRITE CKSUM
+	tank        ONLINE       0     0     0
+	  mirror-0  ONLINE       0     0     0
+	    sda     ONLINE       0     0     0
+	    sdb     ONLINE       0     0     0
+
+errors: No known data errors
+</pre></td>
 </tr>
 <tr>
 <th><a href="2.2/result.html">2.2</a></th>
-<td><pre>/sbin/zpool create tank mirror /dev/sda /dev/sde</pre></td>
-<td></td>
-<td></td>
+<td><pre>  pool: tank
+ state: ONLINE
+  scan: none requested
+config:
+
+	NAME        STATE     READ WRITE CKSUM
+	tank        ONLINE       0     0     0
+	  mirror-0  ONLINE       0     0     0
+	    sda     ONLINE       0     0     0
+	    sde     ONLINE       0     0     0
+
+errors: No known data errors
+</pre></td>
 </tr>
 <tr>
 <th><a href="2.3/result.html">2.3</a></th>
-<td><pre>/sbin/zpool create tank mirror /dev/sda /dev/sdb mirror /dev/sde /dev/sdf</pre></td>
-<td></td>
-<td></td>
+<td><pre>  pool: tank
+ state: ONLINE
+  scan: none requested
+config:
+
+	NAME        STATE     READ WRITE CKSUM
+	tank        ONLINE       0     0     0
+	  mirror-0  ONLINE       0     0     0
+	    sda     ONLINE       0     0     0
+	    sdb     ONLINE       0     0     0
+	  mirror-1  ONLINE       0     0     0
+	    sde     ONLINE       0     0     0
+	    sdf     ONLINE       0     0     0
+
+errors: No known data errors
+</pre></td>
 </tr>
 <tr>
 <th><a href="2.4/result.html">2.4</a></th>
-<td><pre>/sbin/zpool create tank mirror /dev/sda /dev/sdb mirror /dev/sde /dev/sdf</pre></td>
-<td><pre>/sbin/zpool add tank cache /dev/sdc</pre></td>
-<td></td>
+<td><pre>  pool: tank
+ state: ONLINE
+  scan: none requested
+config:
+
+	NAME        STATE     READ WRITE CKSUM
+	tank        ONLINE       0     0     0
+	  mirror-0  ONLINE       0     0     0
+	    sda     ONLINE       0     0     0
+	    sdb     ONLINE       0     0     0
+	  mirror-1  ONLINE       0     0     0
+	    sde     ONLINE       0     0     0
+	    sdf     ONLINE       0     0     0
+	cache
+	  sdc       ONLINE       0     0     0
+
+errors: No known data errors
+</pre></td>
 </tr>
 <tr>
 <th><a href="2.5/result.html">2.5</a></th>
-<td><pre>/sbin/zpool create tank mirror /dev/sda /dev/sdb mirror /dev/sde /dev/sdf</pre></td>
-<td><pre>/sbin/zpool add tank cache /dev/sdc /dev/sdg</pre></td>
-<td></td>
+<td><pre>  pool: tank
+ state: ONLINE
+  scan: none requested
+config:
+
+	NAME        STATE     READ WRITE CKSUM
+	tank        ONLINE       0     0     0
+	  mirror-0  ONLINE       0     0     0
+	    sda     ONLINE       0     0     0
+	    sdb     ONLINE       0     0     0
+	  mirror-1  ONLINE       0     0     0
+	    sde     ONLINE       0     0     0
+	    sdf     ONLINE       0     0     0
+	cache
+	  sdc       ONLINE       0     0     0
+	  sdg       ONLINE       0     0     0
+
+errors: No known data errors
+</pre></td>
 </tr>
 <tr>
 <th><a href="2.6/result.html">2.6</a></th>
-<td><pre>/sbin/zpool create tank mirror /dev/sda /dev/sdb mirror /dev/sde /dev/sdf</pre></td>
-<td><pre>/sbin/zpool add tank cache /dev/sdc /dev/sdg</pre></td>
-<td><pre>/sbin/zpool add -f tank log /dev/sdd</pre></td>
+<td><pre>  pool: tank
+ state: ONLINE
+  scan: none requested
+config:
+
+	NAME        STATE     READ WRITE CKSUM
+	tank        ONLINE       0     0     0
+	  mirror-0  ONLINE       0     0     0
+	    sda     ONLINE       0     0     0
+	    sdb     ONLINE       0     0     0
+	  mirror-1  ONLINE       0     0     0
+	    sde     ONLINE       0     0     0
+	    sdf     ONLINE       0     0     0
+	logs
+	  sdd       ONLINE       0     0     0
+	cache
+	  sdc       ONLINE       0     0     0
+	  sdg       ONLINE       0     0     0
+
+errors: No known data errors
+</pre></td>
 </tr>
 <tr>
 <th><a href="3.1/result.html">3.1</a></th>
-<td><pre>/sbin/zpool create tank raidz /dev/sda /dev/sdb /dev/sde /dev/sdf</pre></td>
-<td></td>
-<td></td>
+<td><pre>  pool: tank
+ state: ONLINE
+  scan: none requested
+config:
+
+	NAME        STATE     READ WRITE CKSUM
+	tank        ONLINE       0     0     0
+	  raidz1-0  ONLINE       0     0     0
+	    sda     ONLINE       0     0     0
+	    sdb     ONLINE       0     0     0
+	    sde     ONLINE       0     0     0
+	    sdf     ONLINE       0     0     0
+
+errors: No known data errors
+</pre></td>
 </tr>
 <tr>
 <th><a href="3.2/result.html">3.2</a></th>
-<td><pre>/sbin/zpool create tank raidz /dev/sda /dev/sdb /dev/sde /dev/sdf</pre></td>
-<td><pre>/sbin/zpool add tank cache /dev/sdc</pre></td>
-<td></td>
+<td><pre>  pool: tank
+ state: ONLINE
+  scan: none requested
+config:
+
+	NAME        STATE     READ WRITE CKSUM
+	tank        ONLINE       0     0     0
+	  raidz1-0  ONLINE       0     0     0
+	    sda     ONLINE       0     0     0
+	    sdb     ONLINE       0     0     0
+	    sde     ONLINE       0     0     0
+	    sdf     ONLINE       0     0     0
+	cache
+	  sdc       ONLINE       0     0     0
+
+errors: No known data errors
+</pre></td>
 </tr>
 <tr>
 <th><a href="3.3/result.html">3.3</a></th>
-<td><pre>/sbin/zpool create tank raidz /dev/sda /dev/sdb /dev/sde /dev/sdf</pre></td>
-<td><pre>/sbin/zpool add tank cache /dev/sdc /dev/sdg</pre></td>
-<td></td>
+<td><pre>  pool: tank
+ state: ONLINE
+  scan: none requested
+config:
+
+	NAME        STATE     READ WRITE CKSUM
+	tank        ONLINE       0     0     0
+	  raidz1-0  ONLINE       0     0     0
+	    sda     ONLINE       0     0     0
+	    sdb     ONLINE       0     0     0
+	    sde     ONLINE       0     0     0
+	    sdf     ONLINE       0     0     0
+	cache
+	  sdc       ONLINE       0     0     0
+	  sdg       ONLINE       0     0     0
+
+errors: No known data errors
+</pre></td>
 </tr>
 <tr>
 <th><a href="3.4/result.html">3.4</a></th>
-<td><pre>/sbin/zpool create tank raidz /dev/sda /dev/sdb /dev/sde /dev/sdf</pre></td>
-<td><pre>/sbin/zpool add tank cache /dev/sdc /dev/sdg</pre></td>
-<td><pre>/sbin/zpool add -f tank log /dev/sdd</pre></td>
+<td><pre>  pool: tank
+ state: ONLINE
+  scan: none requested
+config:
+
+	NAME        STATE     READ WRITE CKSUM
+	tank        ONLINE       0     0     0
+	  raidz1-0  ONLINE       0     0     0
+	    sda     ONLINE       0     0     0
+	    sdb     ONLINE       0     0     0
+	    sde     ONLINE       0     0     0
+	    sdf     ONLINE       0     0     0
+	logs
+	  sdd       ONLINE       0     0     0
+	cache
+	  sdc       ONLINE       0     0     0
+	  sdg       ONLINE       0     0     0
+
+errors: No known data errors
+</pre></td>
 </tr>
 <tr>
 <th><a href="4.1/result.html">4.1</a></th>
-<td><pre>/sbin/zpool create tank raidz2 /dev/sda /dev/sdb /dev/sde /dev/sdf</pre></td>
-<td></td>
-<td></td>
+<td><pre>  pool: tank
+ state: ONLINE
+  scan: none requested
+config:
+
+	NAME        STATE     READ WRITE CKSUM
+	tank        ONLINE       0     0     0
+	  raidz2-0  ONLINE       0     0     0
+	    sda     ONLINE       0     0     0
+	    sdb     ONLINE       0     0     0
+	    sde     ONLINE       0     0     0
+	    sdf     ONLINE       0     0     0
+
+errors: No known data errors
+</pre></td>
 </tr>
 <tr>
 <th><a href="4.2/result.html">4.2</a></th>
-<td><pre>/sbin/zpool create tank raidz2 /dev/sda /dev/sdb /dev/sde /dev/sdf</pre></td>
-<td><pre>/sbin/zpool add tank cache /dev/sdc</pre></td>
-<td></td>
+<td><pre>  pool: tank
+ state: ONLINE
+  scan: none requested
+config:
+
+	NAME        STATE     READ WRITE CKSUM
+	tank        ONLINE       0     0     0
+	  raidz2-0  ONLINE       0     0     0
+	    sda     ONLINE       0     0     0
+	    sdb     ONLINE       0     0     0
+	    sde     ONLINE       0     0     0
+	    sdf     ONLINE       0     0     0
+	cache
+	  sdc       ONLINE       0     0     0
+
+errors: No known data errors
+</pre></td>
 </tr>
 <tr>
 <th><a href="4.3/result.html">4.3</a></th>
-<td><pre>/sbin/zpool create tank raidz2 /dev/sda /dev/sdb /dev/sde /dev/sdf</pre></td>
-<td><pre>/sbin/zpool add tank cache /dev/sdc /dev/sdg</pre></td>
-<td></td>
+<td><pre>  pool: tank
+ state: ONLINE
+  scan: none requested
+config:
+
+	NAME        STATE     READ WRITE CKSUM
+	tank        ONLINE       0     0     0
+	  raidz2-0  ONLINE       0     0     0
+	    sda     ONLINE       0     0     0
+	    sdb     ONLINE       0     0     0
+	    sde     ONLINE       0     0     0
+	    sdf     ONLINE       0     0     0
+	cache
+	  sdc       ONLINE       0     0     0
+	  sdg       ONLINE       0     0     0
+
+errors: No known data errors
+</pre></td>
 </tr>
 <tr>
 <th><a href="4.4/result.html">4.4</a></th>
-<td><pre>/sbin/zpool create tank raidz2 /dev/sda /dev/sdb /dev/sde /dev/sdf</pre></td>
-<td><pre>/sbin/zpool add tank cache /dev/sdc /dev/sdg</pre></td>
-<td><pre>/sbin/zpool add -f tank log /dev/sdd</pre></td>
+<td><pre>  pool: tank
+ state: ONLINE
+  scan: none requested
+config:
+
+	NAME        STATE     READ WRITE CKSUM
+	tank        ONLINE       0     0     0
+	  raidz2-0  ONLINE       0     0     0
+	    sda     ONLINE       0     0     0
+	    sdb     ONLINE       0     0     0
+	    sde     ONLINE       0     0     0
+	    sdf     ONLINE       0     0     0
+	logs
+	  sdd       ONLINE       0     0     0
+	cache
+	  sdc       ONLINE       0     0     0
+	  sdg       ONLINE       0     0     0
+
+errors: No known data errors
+</pre></td>
 </tr>
 </table>
 </div>
 </div>
 </div>
 <div class="container-fluid">
-<div class="center row">&copy; 2015 Philipp Haussleiter</div>
+<div class="center row">&copy; 2016 Philipp Haussleiter</div>
 </div>
 
 </body>

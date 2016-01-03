@@ -1,0 +1,20 @@
+  pool: tank
+ state: ONLINE
+  scan: none requested
+config:
+
+	NAME        STATE     READ WRITE CKSUM
+	tank        ONLINE       0     0     0
+	  mirror-0  ONLINE       0     0     0
+	    sda     ONLINE       0     0     0
+	    sdb     ONLINE       0     0     0
+	  mirror-1  ONLINE       0     0     0
+	    sde     ONLINE       0     0     0
+	    sdf     ONLINE       0     0     0
+	logs
+	  sdd       ONLINE       0     0     0
+	cache
+	  sdc       ONLINE       0     0     0
+	  sdg       ONLINE       0     0     0
+
+errors: No known data errors
