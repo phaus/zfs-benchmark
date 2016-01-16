@@ -12,17 +12,18 @@ $DISK_LIST_CMD = "fdisk -l 2>/dev/null | grep \"Disk \/\" | grep -v \"\/dev\/md\
 $TANK_SIZE_CMD = "du -sh /tank";
 $DATE = "date";
 $FREE = "free -h";
-$HOSTNAME = "hostname";
+$HOSTNAME_CMD = "hostname";
 $UNAME = "uname -a";
 $TOP="(top -b -n 1 | head -n 20) ";
 $CAT="/bin/cat";
+$ECHO="/bin/echo";
 $CPUINFO="cat /proc/cpuinfo";
 $DMESG="dmesg";
 $LSPCI="lspci";
 
 $DD_READ="(time sh -c \"dd if=/tank/tmp of=/dev/null bs=4k\") ";
 $DD_WRITE="(time sh -c \"dd if=/dev/zero of=/tank/tmp bs=4k count=".$SIZE_B_AS_4k." && sync\") ";
-$BOONIE="/usr/sbin/bonnie++ -d /tank -r ".$SIZE_MB." -u root -n 128";
+$BOONIE="/usr/sbin/bonnie++ -q -d /tank -r ".$SIZE_MB." -u root -n 128";
 $BON_CSV2HTML = "/usr/bin/bon_csv2html";
 
 $ZPOOL = "/sbin/zpool";
@@ -32,6 +33,7 @@ $ZPOOL_DESTROY_CMD = "destroy -f tank";
 $ZPOOL_STATUS = "status";
 $ZPOOL_LIST = "list";
 $ZFS_LIST = "list";
+$HOSTNAME = `hostname`;
 
 $TOOLS = array(
 	"zfs",
@@ -109,7 +111,7 @@ addHeader($indexFile, "ZFS Benchmark");
 
 openChapter($indexFile, "Index", "Details");
 runCmd($DATE, $indexFile);
-runCmd($HOSTNAME, $indexFile);
+runCmd($HOSTNAME_CMD, $indexFile);
 runCmd($UNAME, $indexFile);
 runCmd($FREE, $indexFile);
 runCmd($DISK_INDEX_CMD, $indexFile);
@@ -118,6 +120,10 @@ addSystemFile();
 
 fwrite($indexFile, "<p><a href=\"sys/system.html\">...more</a></p>\n");
 fwrite($indexFile, "<p><kbd>Test Size</kbd><br /><samp>".$SIZE_GB." GB</samp></p>\n");
+closeChapter($indexFile);
+
+openChapter($indexFile, "Index", "Prepare");
+runCmd($ECHO." \"\" > bench/boonie.csv", $indexFile);
 closeChapter($indexFile);
 
 addDiskBenchmark($indexFile);
@@ -156,8 +162,13 @@ foreach ($ZPOOL_CREATE_CMDS as $key => $cmd) {
 	closeChapter($benchFile);
 
 	if($RUN_BENCH){
-		runBoonie($benchFile, $key);
-
+		
+		if(isset($ZPOOL_CACHE[$key]) || isset($ZPOOL_LOG[$key])) {
+			runBoonie($benchFile, $key);
+			runBoonie($benchFile, $key."_c");
+		} else {
+			runBoonie($benchFile, $key);	
+		}
 		openChapter($benchFile, $key, "DD");
 		runCmd("echo \"start \" && date", $benchFile);
 		runCmd($TOP, $benchFile);
@@ -184,6 +195,7 @@ closeChapter($indexFile);
 
 openChapter($indexFile, "Index", "Benchmark Matrix");
 createTestMatrix($indexFile);
+createBoonieoutput($indexFile);
 closeChapter($indexFile);
 
 addFooter($indexFile);
@@ -201,26 +213,31 @@ function getDisks() {
 }
 
 function runBoonie($benchFile, $key) {
-	global $TOP, $BOONIE, $BON_CSV2HTML, $CAT;
+	global $TOP, $HOSTNAME, $BOONIE;
 	
 	openChapter($benchFile, $key, "Boonie");
 	runCmd("echo \"start \" && date", $benchFile);	
 	runCmd($TOP, $benchFile);
 
 	fwrite($benchFile, "<p class=\"cmd\">\n");
-	$cmd = $BOONIE." >> bench/".$key."/boonie.csv";
+	$cmd = $BOONIE." -m ".$HOSTNAME."_".$key." >> bench/boonie.csv";
 	$output = shell_exec($cmd." 2>&1");
 	fwrite($benchFile, "<kbd>".$cmd."</kbd>\n<br />\n");
-	$cmd = $BON_CSV2HTML." bench/".$key."/boonie.csv > bench/".$key."/boonie.html";
-	$output = shell_exec($cmd." 2>&1");
-	fwrite($benchFile, "<kbd>".$cmd."</kbd>\n<br />\n");
-	$cmd = $CAT." bench/".$key."/boonie.html";
-	$output = shell_exec($cmd." 2>&1");
-	fwrite($benchFile, splitBoonieOutput($output)."\n");
-	fwrite($benchFile, "</p>\n");
+
 	runCmd($TOP, $benchFile);
 	runCmd("echo \"end \" && date", $benchFile);
 	closeChapter($benchFile);
+}
+
+function createBoonieoutput($benchFile) {
+	global $BON_CSV2HTML, $CAT;
+	$cmd = $BON_CSV2HTML." bench/boonie.csv > bench/boonie.html";
+	$output = shell_exec($cmd." 2>&1");
+	fwrite($benchFile, "<kbd>".$cmd."</kbd>\n<br />\n");
+	$cmd = $CAT." bench/boonie.html";
+	$output = shell_exec($cmd." 2>&1");
+	fwrite($benchFile, splitBoonieOutput($output)."\n");
+	fwrite($benchFile, "</p>\n");
 }
 
 function runCmd($cmd, $benchFile) {
