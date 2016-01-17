@@ -1,0 +1,309 @@
+
+Version  1.97       ------Sequential Output------ --Sequential Input- --Random-
+Concurrency   1     -Per Chr- --Block-- -Rewrite- -Per Chr- --Block-- --Seeks--
+Machine        Size K/sec %CP K/sec %CP K/sec %CP K/sec %CP K/sec %CP  /sec %CP
+dl380_1.1      32G   141  99 97849  28 44364   8   402  91 93455   6  93.4   7
+Latency             61300us   57382us    3737ms     342ms    1021ms     724ms
+Version  1.97       ------Sequential Create------ --------Random Create--------
+dl380_1.1          -Create-- --Read--- -Delete-- -Create-- --Read--- -Delete--
+              files  /sec %CP  /sec %CP  /sec %CP  /sec %CP  /sec %CP  /sec %CP
+                128 16568  99 +++++ +++ 16236  99 19574  99 +++++ +++ 16229  99
+Latency               156ms     480us   12479us   98335us     196us   10444us
+1.97,1.97,dl380_1.1,1,1452955411,32G,,141,99,97849,28,44364,8,402,91,93455,6,93.4,7,128,,,,,16568,99,+++++,+++,16236,99,19574,99,+++++,+++,16229,99,61300us,57382us,3737ms,342ms,1021ms,724ms,156ms,480us,12479us,98335us,196us,10444us
+Version  1.97       ------Sequential Output------ --Sequential Input- --Random-
+Concurrency   1     -Per Chr- --Block-- -Rewrite- -Per Chr- --Block-- --Seeks--
+Machine        Size K/sec %CP K/sec %CP K/sec %CP K/sec %CP K/sec %CP  /sec %CP
+dl380_1.2      32G   141  99 138336  36 72670  14   398  91 164764  11 177.1  13
+Latency             62121us   60778us    2136ms     691ms     623ms     188ms
+Version  1.97       ------Sequential Create------ --------Random Create--------
+dl380_1.2          -Create-- --Read--- -Delete-- -Create-- --Read--- -Delete--
+              files  /sec %CP  /sec %CP  /sec %CP  /sec %CP  /sec %CP  /sec %CP
+                128 16090  99 +++++ +++ 17516  99 20145  99 +++++ +++ 17481  99
+Latency               171ms     431us    2128us   94460us      65us    1891us
+1.97,1.97,dl380_1.2,1,1452956961,32G,,141,99,138336,36,72670,14,398,91,164764,11,177.1,13,128,,,,,16090,99,+++++,+++,17516,99,20145,99,+++++,+++,17481,99,62121us,60778us,2136ms,691ms,623ms,188ms,171ms,431us,2128us,94460us,65us,1891us
+Version  1.97       ------Sequential Output------ --Sequential Input- --Random-
+Concurrency   1     -Per Chr- --Block-- -Rewrite- -Per Chr- --Block-- --Seeks--
+Machine        Size K/sec %CP K/sec %CP K/sec %CP K/sec %CP K/sec %CP  /sec %CP
+dl380_1.3      32G   140  99 183301  43 85265  16   427  98 227206  15 240.5  18
+Latency             62304us   54434us    2250ms     142ms     777ms     190ms
+Version  1.97       ------Sequential Create------ --------Random Create--------
+dl380_1.3          -Create-- --Read--- -Delete-- -Create-- --Read--- -Delete--
+              files  /sec %CP  /sec %CP  /sec %CP  /sec %CP  /sec %CP  /sec %CP
+                128 16374  99 +++++ +++ 16698  99 19124  99 +++++ +++ 16953  99
+Latency               169ms     313us     578us   96169us      20us    1401us
+1.97,1.97,dl380_1.3,1,1452951369,32G,,140,99,183301,43,85265,16,427,98,227206,15,240.5,18,128,,,,,16374,99,+++++,+++,16698,99,19124,99,+++++,+++,16953,99,62304us,54434us,2250ms,142ms,777ms,190ms,169ms,313us,578us,96169us,20us,1401us
+Version  1.97       ------Sequential Output------ --Sequential Input- --Random-
+Concurrency   1     -Per Chr- --Block-- -Rewrite- -Per Chr- --Block-- --Seeks--
+Machine        Size K/sec %CP K/sec %CP K/sec %CP K/sec %CP K/sec %CP  /sec %CP
+dl380_1.4      32G   140  99 237496  52 115436  23   409  93 282633  19 283.3  21
+Latency             62806us   22012us    2124ms     343ms     437ms     194ms
+Version  1.97       ------Sequential Create------ --------Random Create--------
+dl380_1.4          -Create-- --Read--- -Delete-- -Create-- --Read--- -Delete--
+              files  /sec %CP  /sec %CP  /sec %CP  /sec %CP  /sec %CP  /sec %CP
+                128 16421  99 +++++ +++ 16841  99 18321  99 +++++ +++ 17389  99
+Latency               165ms     608us    2526us   92224us     153us    1635us
+1.97,1.97,dl380_1.4,1,1452949846,32G,,140,99,237496,52,115436,23,409,93,282633,19,283.3,21,128,,,,,16421,99,+++++,+++,16841,99,18321,99,+++++,+++,17389,99,62806us,22012us,2124ms,343ms,437ms,194ms,165ms,608us,2526us,92224us,153us,1635us
+Version  1.97       ------Sequential Output------ --Sequential Input- --Random-
+Concurrency   1     -Per Chr- --Block-- -Rewrite- -Per Chr- --Block-- --Seeks--
+Machine        Size K/sec %CP K/sec %CP K/sec %CP K/sec %CP K/sec %CP  /sec %CP
+dl380_1.5      32G   139  99 381242  65 160050  32   433  99 411817  28 368.1  26
+Latency             65179us   24726us    2033ms   64256us     536ms     192ms
+Version  1.97       ------Sequential Create------ --------Random Create--------
+dl380_1.5          -Create-- --Read--- -Delete-- -Create-- --Read--- -Delete--
+              files  /sec %CP  /sec %CP  /sec %CP  /sec %CP  /sec %CP  /sec %CP
+                128 16119  99 +++++ +++ 15874  99 18450  99 +++++ +++ 15432  99
+Latency               167ms     627us    1173us   94552us     199us    3726us
+1.97,1.97,dl380_1.5,1,1452949612,32G,,139,99,381242,65,160050,32,433,99,411817,28,368.1,26,128,,,,,16119,99,+++++,+++,15874,99,18450,99,+++++,+++,15432,99,65179us,24726us,2033ms,64256us,536ms,192ms,167ms,627us,1173us,94552us,199us,3726us
+Version  1.97       ------Sequential Output------ --Sequential Input- --Random-
+Concurrency   1     -Per Chr- --Block-- -Rewrite- -Per Chr- --Block-- --Seeks--
+Machine        Size K/sec %CP K/sec %CP K/sec %CP K/sec %CP K/sec %CP  /sec %CP
+dl380_2.1      32G   142  99 54925  21 39888   7   412  94 124546   9 184.6  14
+Latency             64070us   41582us    2785ms     185ms    1297ms     660ms
+Version  1.97       ------Sequential Create------ --------Random Create--------
+dl380_2.1          -Create-- --Read--- -Delete-- -Create-- --Read--- -Delete--
+              files  /sec %CP  /sec %CP  /sec %CP  /sec %CP  /sec %CP  /sec %CP
+                128 16694  99 +++++ +++ 16877  99 19114  99 +++++ +++ 16419  99
+Latency               165ms     476us     934us   77781us      56us     689us
+1.97,1.97,dl380_2.1,1,1452949652,32G,,142,99,54925,21,39888,7,412,94,124546,9,184.6,14,128,,,,,16694,99,+++++,+++,16877,99,19114,99,+++++,+++,16419,99,64070us,41582us,2785ms,185ms,1297ms,660ms,165ms,476us,934us,77781us,56us,689us
+Version  1.97       ------Sequential Output------ --Sequential Input- --Random-
+Concurrency   1     -Per Chr- --Block-- -Rewrite- -Per Chr- --Block-- --Seeks--
+Machine        Size K/sec %CP K/sec %CP K/sec %CP K/sec %CP K/sec %CP  /sec %CP
+dl380_2.2      32G   141  99 75985  25 43506   8   387  88 116400   8 152.6  11
+Latency             67152us   61543us    4271ms     711ms    1001ms     479ms
+Version  1.97       ------Sequential Create------ --------Random Create--------
+dl380_2.2          -Create-- --Read--- -Delete-- -Create-- --Read--- -Delete--
+              files  /sec %CP  /sec %CP  /sec %CP  /sec %CP  /sec %CP  /sec %CP
+                128 17155  99 +++++ +++ 16310  99 19890  99 +++++ +++ 14896  99
+Latency               147ms     309us     742us     106ms     184us     687us
+1.97,1.97,dl380_2.2,1,1452964323,32G,,141,99,75985,25,43506,8,387,88,116400,8,152.6,11,128,,,,,17155,99,+++++,+++,16310,99,19890,99,+++++,+++,14896,99,67152us,61543us,4271ms,711ms,1001ms,479ms,147ms,309us,742us,106ms,184us,687us
+Version  1.97       ------Sequential Output------ --Sequential Input- --Random-
+Concurrency   1     -Per Chr- --Block-- -Rewrite- -Per Chr- --Block-- --Seeks--
+Machine        Size K/sec %CP K/sec %CP K/sec %CP K/sec %CP K/sec %CP  /sec %CP
+dl380_2.3      32G   141  99 127225  35 72400  14   418  96 222389  15 263.1  19
+Latency             65837us   56941us    2008ms     131ms     333ms     141ms
+Version  1.97       ------Sequential Create------ --------Random Create--------
+dl380_2.3          -Create-- --Read--- -Delete-- -Create-- --Read--- -Delete--
+              files  /sec %CP  /sec %CP  /sec %CP  /sec %CP  /sec %CP  /sec %CP
+                128 16339  99 +++++ +++ 16445  99 17850  99 +++++ +++ 15215  99
+Latency               168ms     474us    3140us   96852us     178us     776us
+1.97,1.97,dl380_2.3,1,1452962770,32G,,141,99,127225,35,72400,14,418,96,222389,15,263.1,19,128,,,,,16339,99,+++++,+++,16445,99,17850,99,+++++,+++,15215,99,65837us,56941us,2008ms,131ms,333ms,141ms,168ms,474us,3140us,96852us,178us,776us
+Version  1.97       ------Sequential Output------ --Sequential Input- --Random-
+Concurrency   1     -Per Chr- --Block-- -Rewrite- -Per Chr- --Block-- --Seeks--
+Machine        Size K/sec %CP K/sec %CP K/sec %CP K/sec %CP K/sec %CP  /sec %CP
+dl380_2.4      32G   141  99 126219  34 77749  15   420  98 222516  16 755.2  40
+Latency             64082us   35241us    1598ms   60011us     754ms     215ms
+Version  1.97       ------Sequential Create------ --------Random Create--------
+dl380_2.4          -Create-- --Read--- -Delete-- -Create-- --Read--- -Delete--
+              files  /sec %CP  /sec %CP  /sec %CP  /sec %CP  /sec %CP  /sec %CP
+                128 16459  99 +++++ +++ 17968  99 17964  99 +++++ +++ 16458  99
+Latency               167ms     460us     764us   98468us     196us    7357us
+1.97,1.97,dl380_2.4 ,1,1452953739,32G,,141,99,126219,34,77749,15,420,98,222516,16,755.2,40,128,,,,,16459,99,+++++,+++,17968,99,17964,99,+++++,+++,16458,99,64082us,35241us,1598ms,60011us,754ms,215ms,167ms,460us,764us,98468us,196us,7357us
+Version  1.97       ------Sequential Output------ --Sequential Input- --Random-
+Concurrency   1     -Per Chr- --Block-- -Rewrite- -Per Chr- --Block-- --Seeks--
+Machine        Size K/sec %CP K/sec %CP K/sec %CP K/sec %CP K/sec %CP  /sec %CP
+dl380_2.4_c  32G   135  99 129283  35 77823  16   424  97 231768  16 756.9  41
+Latency             67748us   32324us    2103ms     115ms     568ms     157ms
+Version  1.97       ------Sequential Create------ --------Random Create--------
+dl380_2.4_c -Create-- --Read--- -Delete-- -Create-- --Read--- -Delete--
+              files  /sec %CP  /sec %CP  /sec %CP  /sec %CP  /sec %CP  /sec %CP
+                128 16366  99 +++++ +++ 14802  99 16211  99 +++++ +++ 13510  99
+Latency               161ms     330us   16185us   71208us     187us    3716us
+1.97,1.97,dl380_2.4_c,1,1452954888,32G,,135,99,129283,35,77823,16,424,97,231768,16,756.9,41,128,,,,,16366,99,+++++,+++,14802,99,16211,99,+++++,+++,13510,99,67748us,32324us,2103ms,115ms,568ms,157ms,161ms,330us,16185us,71208us,187us,3716us
+Version  1.97       ------Sequential Output------ --Sequential Input- --Random-
+Concurrency   1     -Per Chr- --Block-- -Rewrite- -Per Chr- --Block-- --Seeks--
+Machine        Size K/sec %CP K/sec %CP K/sec %CP K/sec %CP K/sec %CP  /sec %CP
+dl380_2.5      32G   139  99 123070  34 71489  14   420  97 200350  14 699.5  38
+Latency             63937us   31930us    2094ms   92368us     702ms     355ms
+Version  1.97       ------Sequential Create------ --------Random Create--------
+dl380_2.5          -Create-- --Read--- -Delete-- -Create-- --Read--- -Delete--
+              files  /sec %CP  /sec %CP  /sec %CP  /sec %CP  /sec %CP  /sec %CP
+                128 17253  99 +++++ +++ 17673  99 16531  99 +++++ +++ 14227  99
+Latency               150ms     351us    1189us   80427us     181us    1358us
+1.97,1.97,dl380_2.5 ,1,1452956300,32G,,139,99,123070,34,71489,14,420,97,200350,14,699.5,38,128,,,,,17253,99,+++++,+++,17673,99,16531,99,+++++,+++,14227,99,63937us,31930us,2094ms,92368us,702ms,355ms,150ms,351us,1189us,80427us,181us,1358us
+Version  1.97       ------Sequential Output------ --Sequential Input- --Random-
+Concurrency   1     -Per Chr- --Block-- -Rewrite- -Per Chr- --Block-- --Seeks--
+Machine        Size K/sec %CP K/sec %CP K/sec %CP K/sec %CP K/sec %CP  /sec %CP
+dl380 2.5 (c)  32G   133  99 123501  34 76880  15   428  99 225573  16 677.2  38
+Latency             63400us   47715us    1977ms   62947us     794ms     189ms
+Version  1.97       ------Sequential Create------ --------Random Create--------
+dl380_2.5 -Create-- --Read--- -Delete-- -Create-- --Read--- -Delete--
+              files  /sec %CP  /sec %CP  /sec %CP  /sec %CP  /sec %CP  /sec %CP
+                128 16767  99 +++++ +++ 17855  99 19269  99 +++++ +++ 14631  99
+Latency               139ms     529us    1917us     124ms     170us    2629us
+1.97,1.97,dl380_2.5_c,1,1452957514,32G,,133,99,123501,34,76880,15,428,99,225573,16,677.2,38,128,,,,,16767,99,+++++,+++,17855,99,19269,99,+++++,+++,14631,99,63400us,47715us,1977ms,62947us,794ms,189ms,139ms,529us,1917us,124ms,170us,2629us
+Version  1.97       ------Sequential Output------ --Sequential Input- --Random-
+Concurrency   1     -Per Chr- --Block-- -Rewrite- -Per Chr- --Block-- --Seeks--
+Machine        Size K/sec %CP K/sec %CP K/sec %CP K/sec %CP K/sec %CP  /sec %CP
+dl380_2.6      32G   138  99 135117  36 71580  14   423  98 190964  13 753.7  41
+Latency             60867us   78998us    1425ms   95215us    1021ms     307ms
+Version  1.97       ------Sequential Create------ --------Random Create--------
+dl380_2.6          -Create-- --Read--- -Delete-- -Create-- --Read--- -Delete--
+              files  /sec %CP  /sec %CP  /sec %CP  /sec %CP  /sec %CP  /sec %CP
+                128 16104  99 +++++ +++ 17847  99 20543  99 +++++ +++ 15199  99
+Latency               171ms     319us    6846us   92732us      54us   10552us
+1.97,1.97,dl380_2.6,1,1452975336,32G,,138,99,135117,36,71580,14,423,98,190964,13,753.7,41,128,,,,,16104,99,+++++,+++,17847,99,20543,99,+++++,+++,15199,99,60867us,78998us,1425ms,95215us,1021ms,307ms,171ms,319us,6846us,92732us,54us,10552us
+Version  1.97       ------Sequential Output------ --Sequential Input- --Random-
+Concurrency   1     -Per Chr- --Block-- -Rewrite- -Per Chr- --Block-- --Seeks--
+Machine        Size K/sec %CP K/sec %CP K/sec %CP K/sec %CP K/sec %CP  /sec %CP
+dl380_2.6_c 32G   132  99 121844  34 69558  14   404  94 221041  16 699.0  38
+Latency             82988us   31221us    1752ms     326ms    3440ms     375ms
+Version  1.97       ------Sequential Create------ --------Random Create--------
+dl380_2.6_c -Create-- --Read--- -Delete-- -Create-- --Read--- -Delete--
+              files  /sec %CP  /sec %CP  /sec %CP  /sec %CP  /sec %CP  /sec %CP
+                128 16476  99 +++++ +++ 18882  99 19998  99 +++++ +++ 15101  99
+Latency               157ms     317us     511us   88934us     172us    3126us
+1.97,1.97,dl380_2.6_c,1,1452974316,32G,,132,99,121844,34,69558,14,404,94,221041,16,699.0,38,128,,,,,16476,99,+++++,+++,18882,99,19998,99,+++++,+++,15101,99,82988us,31221us,1752ms,326ms,3440ms,375ms,157ms,317us,511us,88934us,172us,3126us
+Version  1.97       ------Sequential Output------ --Sequential Input- --Random-
+Concurrency   1     -Per Chr- --Block-- -Rewrite- -Per Chr- --Block-- --Seeks--
+Machine        Size K/sec %CP K/sec %CP K/sec %CP K/sec %CP K/sec %CP  /sec %CP
+dl380_3.1      32G   140  99 196248  47 94393  19   411  95 238990  16 144.7  11
+Latency             84813us   24621us    4147ms     314ms     694ms     186ms
+Version  1.97       ------Sequential Create------ --------Random Create--------
+dl380_3.1          -Create-- --Read--- -Delete-- -Create-- --Read--- -Delete--
+              files  /sec %CP  /sec %CP  /sec %CP  /sec %CP  /sec %CP  /sec %CP
+                128 17694  99 +++++ +++ 17287  99 19714  99 +++++ +++ 16174  99
+Latency               134ms     319us    5429us     106ms     164us     791us
+1.97,1.97,dl380_3.1,1,1452977789,32G,,140,99,196248,47,94393,19,411,95,238990,16,144.7,11,128,,,,,17694,99,+++++,+++,17287,99,19714,99,+++++,+++,16174,99,84813us,24621us,4147ms,314ms,694ms,186ms,134ms,319us,5429us,106ms,164us,791us
+Version  1.97       ------Sequential Output------ --Sequential Input- --Random-
+Concurrency   1     -Per Chr- --Block-- -Rewrite- -Per Chr- --Block-- --Seeks--
+Machine        Size K/sec %CP K/sec %CP K/sec %CP K/sec %CP K/sec %CP  /sec %CP
+dl380_3.2      32G   142  99 194129  46 92417  19   396  91 237380  18 338.2  22
+Latency             62326us   20796us    2165ms     648ms     793ms     227ms
+Version  1.97       ------Sequential Create------ --------Random Create--------
+dl380_3.2          -Create-- --Read--- -Delete-- -Create-- --Read--- -Delete--
+              files  /sec %CP  /sec %CP  /sec %CP  /sec %CP  /sec %CP  /sec %CP
+                128 15924  99 +++++ +++ 17274  99 19089  99 +++++ +++ 14204  99
+Latency               175ms     467us     571us     113ms     140us    1484us
+1.97,1.97,dl380_3.2 ,1,1452975331,32G,,142,99,194129,46,92417,19,396,91,237380,18,338.2,22,128,,,,,15924,99,+++++,+++,17274,99,19089,99,+++++,+++,14204,99,62326us,20796us,2165ms,648ms,793ms,227ms,175ms,467us,571us,113ms,140us,1484us
+Version  1.97       ------Sequential Output------ --Sequential Input- --Random-
+Concurrency   1     -Per Chr- --Block-- -Rewrite- -Per Chr- --Block-- --Seeks--
+Machine        Size K/sec %CP K/sec %CP K/sec %CP K/sec %CP K/sec %CP  /sec %CP
+dl380_3.2_c 32G   132  99 199150  47 90332  19   401  93 239989  17 275.4  19
+Latency             88019us   37428us    2471ms     522ms     785ms     238ms
+Version  1.97       ------Sequential Create------ --------Random Create--------
+dl380_3.2_c -Create-- --Read--- -Delete-- -Create-- --Read--- -Delete--
+              files  /sec %CP  /sec %CP  /sec %CP  /sec %CP  /sec %CP  /sec %CP
+                128 16581  99 +++++ +++ 16564  99 16039  99 +++++ +++ 16591  99
+Latency               156ms     313us     737us   70065us     145us    4364us
+1.97,1.97,dl380_3.2_c,1,1452980879,32G,,132,99,199150,47,90332,19,401,93,239989,17,275.4,19,128,,,,,16581,99,+++++,+++,16564,99,16039,99,+++++,+++,16591,99,88019us,37428us,2471ms,522ms,785ms,238ms,156ms,313us,737us,70065us,145us,4364us
+Version  1.97       ------Sequential Output------ --Sequential Input- --Random-
+Concurrency   1     -Per Chr- --Block-- -Rewrite- -Per Chr- --Block-- --Seeks--
+Machine        Size K/sec %CP K/sec %CP K/sec %CP K/sec %CP K/sec %CP  /sec %CP
+dl380_3.3      32G   138  99 206129  48 91522  19   376  87 231863  17 286.7  20
+Latency             64083us   35517us    2007ms     959ms     949ms     240ms
+Version  1.97       ------Sequential Create------ --------Random Create--------
+dl380_3.3          -Create-- --Read--- -Delete-- -Create-- --Read--- -Delete--
+              files  /sec %CP  /sec %CP  /sec %CP  /sec %CP  /sec %CP  /sec %CP
+                128 19572  99 +++++ +++ 18445  99 19581  99 +++++ +++ 14809  99
+Latency               102ms     411us     952us     122ms     218us    3372us
+1.97,1.97,dl380_3.3 ,1,1452982192,32G,,138,99,206129,48,91522,19,376,87,231863,17,286.7,20,128,,,,,19572,99,+++++,+++,18445,99,19581,99,+++++,+++,14809,99,64083us,35517us,2007ms,959ms,949ms,240ms,102ms,411us,952us,122ms,218us,3372us
+Version  1.97       ------Sequential Output------ --Sequential Input- --Random-
+Concurrency   1     -Per Chr- --Block-- -Rewrite- -Per Chr- --Block-- --Seeks--
+Machine        Size K/sec %CP K/sec %CP K/sec %CP K/sec %CP K/sec %CP  /sec %CP
+dl380_3.3_c 32G   131  99 193545  45 90501  19   397  92 243199  18 248.2  18
+Latency             68865us   18034us    2096ms     575ms    1246ms     207ms
+Version  1.97       ------Sequential Create------ --------Random Create--------
+dl380_3.3_c -Create-- --Read--- -Delete-- -Create-- --Read--- -Delete--
+              files  /sec %CP  /sec %CP  /sec %CP  /sec %CP  /sec %CP  /sec %CP
+                128 16532  99 +++++ +++ 16151  99 18343  99 +++++ +++ 18565  99
+Latency               160ms     312us    3870us     103ms      65us     790us
+1.97,1.97,dl380_3.3_c,1,1452981039,32G,,131,99,193545,45,90501,19,397,92,243199,18,248.2,18,128,,,,,16532,99,+++++,+++,16151,99,18343,99,+++++,+++,18565,99,68865us,18034us,2096ms,575ms,1246ms,207ms,160ms,312us,3870us,103ms,65us,790us
+Version  1.97       ------Sequential Output------ --Sequential Input- --Random-
+Concurrency   1     -Per Chr- --Block-- -Rewrite- -Per Chr- --Block-- --Seeks--
+Machine        Size K/sec %CP K/sec %CP K/sec %CP K/sec %CP K/sec %CP  /sec %CP
+dl380_3.4      32G   138  99 201960  47 95133  20   416  96 238301  18 344.7  23
+Latency             66618us   29320us     999ms     238ms     536ms     197ms
+Version  1.97       ------Sequential Create------ --------Random Create--------
+dl380_3.4          -Create-- --Read--- -Delete-- -Create-- --Read--- -Delete--
+              files  /sec %CP  /sec %CP  /sec %CP  /sec %CP  /sec %CP  /sec %CP
+                128 16214  99 +++++ +++ 17313  99 15686  99 +++++ +++ 18413  99
+Latency               172ms     499us    1421us   76159us      20us    3612us
+1.97,1.97,dl380_3.4 ,1,1452979991,32G,,138,99,201960,47,95133,20,416,96,238301,18,344.7,23,128,,,,,16214,99,+++++,+++,17313,99,15686,99,+++++,+++,18413,99,66618us,29320us,999ms,238ms,536ms,197ms,172ms,499us,1421us,76159us,20us,3612us
+Version  1.97       ------Sequential Output------ --Sequential Input- --Random-
+Concurrency   1     -Per Chr- --Block-- -Rewrite- -Per Chr- --Block-- --Seeks--
+Machine        Size K/sec %CP K/sec %CP K/sec %CP K/sec %CP K/sec %CP  /sec %CP
+dl380_3.4_c 32G   130  99 205910  48 94888  20   411  94 250719  18 277.8  19
+Latency             64172us   28439us    1433ms     326ms    1007ms     200ms
+Version  1.97       ------Sequential Create------ --------Random Create--------
+dl380_3.4_c -Create-- --Read--- -Delete-- -Create-- --Read--- -Delete--
+              files  /sec %CP  /sec %CP  /sec %CP  /sec %CP  /sec %CP  /sec %CP
+                128 16222  99 +++++ +++ 14135  99 16040  99 +++++ +++ 16767  99
+Latency               162ms     565us    1021us   70149us      80us    1756us
+1.97,1.97,dl380_3.4_c,1,1452979139,32G,,130,99,205910,48,94888,20,411,94,250719,18,277.8,19,128,,,,,16222,99,+++++,+++,14135,99,16040,99,+++++,+++,16767,99,64172us,28439us,1433ms,326ms,1007ms,200ms,162ms,565us,1021us,70149us,80us,1756us
+Version  1.97       ------Sequential Output------ --Sequential Input- --Random-
+Concurrency   1     -Per Chr- --Block-- -Rewrite- -Per Chr- --Block-- --Seeks--
+Machine        Size K/sec %CP K/sec %CP K/sec %CP K/sec %CP K/sec %CP  /sec %CP
+dl380_4.1      32G   136  99 133965  37 63985  13   409  96 174624  12 144.4  11
+Latency             66355us   37974us    2003ms     247ms     769ms     259ms
+Version  1.97       ------Sequential Create------ --------Random Create--------
+dl380_4.1          -Create-- --Read--- -Delete-- -Create-- --Read--- -Delete--
+              files  /sec %CP  /sec %CP  /sec %CP  /sec %CP  /sec %CP  /sec %CP
+                128 16849  99 +++++ +++ 16401  99 17947  99 +++++ +++ 18964  99
+Latency               149ms     454us    1163us   91621us     175us     791us
+1.97,1.97,dl380_4.1,1,1452969660,32G,,136,99,133965,37,63985,13,409,96,174624,12,144.4,11,128,,,,,16849,99,+++++,+++,16401,99,17947,99,+++++,+++,18964,99,66355us,37974us,2003ms,247ms,769ms,259ms,149ms,454us,1163us,91621us,175us,791us
+Version  1.97       ------Sequential Output------ --Sequential Input- --Random-
+Concurrency   1     -Per Chr- --Block-- -Rewrite- -Per Chr- --Block-- --Seeks--
+Machine        Size K/sec %CP K/sec %CP K/sec %CP K/sec %CP K/sec %CP  /sec %CP
+dl380_4.2      32G   139  99 134505  37 62145  13   422  98 171561  12 345.5  24
+Latency             62688us   31405us    1473ms   69941us     999ms     268ms
+Version  1.97       ------Sequential Create------ --------Random Create--------
+dl380_4.2          -Create-- --Read--- -Delete-- -Create-- --Read--- -Delete--
+              files  /sec %CP  /sec %CP  /sec %CP  /sec %CP  /sec %CP  /sec %CP
+                128 16362  99 +++++ +++ 16975  99 17744  99 +++++ +++ 14716  99
+Latency               164ms     472us    1427us   94648us     134us     804us
+1.97,1.97,dl380_4.2 ,1,1452971847,32G,,139,99,134505,37,62145,13,422,98,171561,12,345.5,24,128,,,,,16362,99,+++++,+++,16975,99,17744,99,+++++,+++,14716,99,62688us,31405us,1473ms,69941us,999ms,268ms,164ms,472us,1427us,94648us,134us,804us
+Version  1.97       ------Sequential Output------ --Sequential Input- --Random-
+Concurrency   1     -Per Chr- --Block-- -Rewrite- -Per Chr- --Block-- --Seeks--
+Machine        Size K/sec %CP K/sec %CP K/sec %CP K/sec %CP K/sec %CP  /sec %CP
+dl380_4.2_c 32G   131  99 134627  38 60457  13   379  89 172934  12 328.4  23
+Latency             66384us   25818us    2028ms     799ms     589ms     223ms
+Version  1.97       ------Sequential Create------ --------Random Create--------
+dl380_4.2_c -Create-- --Read--- -Delete-- -Create-- --Read--- -Delete--
+              files  /sec %CP  /sec %CP  /sec %CP  /sec %CP  /sec %CP  /sec %CP
+                128 15968  99 +++++ +++ 16259  99 15970  99 +++++ +++ 15436  99
+Latency               171ms     458us     823us   68709us     173us    2364us
+1.97,1.97,dl380_4.2_c,1,1452972888,32G,,131,99,134627,38,60457,13,379,89,172934,12,328.4,23,128,,,,,15968,99,+++++,+++,16259,99,15970,99,+++++,+++,15436,99,66384us,25818us,2028ms,799ms,589ms,223ms,171ms,458us,823us,68709us,173us,2364us
+Version  1.97       ------Sequential Output------ --Sequential Input- --Random-
+Concurrency   1     -Per Chr- --Block-- -Rewrite- -Per Chr- --Block-- --Seeks--
+Machine        Size K/sec %CP K/sec %CP K/sec %CP K/sec %CP K/sec %CP  /sec %CP
+dl380_4.3      32G   140  99 129538  37 61224  13   390  91 158747  11 349.8  24
+Latency             63009us   29532us    2018ms     421ms     606ms     225ms
+Version  1.97       ------Sequential Create------ --------Random Create--------
+dl380_4.3          -Create-- --Read--- -Delete-- -Create-- --Read--- -Delete--
+              files  /sec %CP  /sec %CP  /sec %CP  /sec %CP  /sec %CP  /sec %CP
+                128 16010  99 +++++ +++ 15894  99 17960  99 +++++ +++ 15590  99
+Latency               175ms     512us     789us   97450us     241us    1699us
+1.97,1.97,dl380_4.3 ,1,1452973100,32G,,140,99,129538,37,61224,13,390,91,158747,11,349.8,24,128,,,,,16010,99,+++++,+++,15894,99,17960,99,+++++,+++,15590,99,63009us,29532us,2018ms,421ms,606ms,225ms,175ms,512us,789us,97450us,241us,1699us
+Version  1.97       ------Sequential Output------ --Sequential Input- --Random-
+Concurrency   1     -Per Chr- --Block-- -Rewrite- -Per Chr- --Block-- --Seeks--
+Machine        Size K/sec %CP K/sec %CP K/sec %CP K/sec %CP K/sec %CP  /sec %CP
+dl380_4.3_c 32G   130  99 134708  37 65048  14   406  93 185901  13 384.8  25
+Latency             71897us   30215us    1752ms     245ms     331ms     226ms
+Version  1.97       ------Sequential Create------ --------Random Create--------
+dl380_4.3_c -Create-- --Read--- -Delete-- -Create-- --Read--- -Delete--
+              files  /sec %CP  /sec %CP  /sec %CP  /sec %CP  /sec %CP  /sec %CP
+                128 16086  99 +++++ +++ 17676  99 20173  99 +++++ +++ 13483  99
+Latency               168ms     545us    3934us     101ms     182us    2754us
+1.97,1.97,dl380_4.3_c,1,1452965945,32G,,130,99,134708,37,65048,14,406,93,185901,13,384.8,25,128,,,,,16086,99,+++++,+++,17676,99,20173,99,+++++,+++,13483,99,71897us,30215us,1752ms,245ms,331ms,226ms,168ms,545us,3934us,101ms,182us,2754us
+Version  1.97       ------Sequential Output------ --Sequential Input- --Random-
+Concurrency   1     -Per Chr- --Block-- -Rewrite- -Per Chr- --Block-- --Seeks--
+Machine        Size K/sec %CP K/sec %CP K/sec %CP K/sec %CP K/sec %CP  /sec %CP
+dl380_4.4      32G   138  99 133463  37 64845  14   407  94 171688  13 366.5  25
+Latency             60389us   21026us    1627ms     382ms     517ms     223ms
+Version  1.97       ------Sequential Create------ --------Random Create--------
+dl380_4.4          -Create-- --Read--- -Delete-- -Create-- --Read--- -Delete--
+              files  /sec %CP  /sec %CP  /sec %CP  /sec %CP  /sec %CP  /sec %CP
+                128 16403  99 +++++ +++ 16453  99 19505  99 +++++ +++ 14417  99
+Latency               166ms     720us    6047us     122ms     177us    4998us
+1.97,1.97,dl380_4.4 ,1,1452969794,32G,,138,99,133463,37,64845,14,407,94,171688,13,366.5,25,128,,,,,16403,99,+++++,+++,16453,99,19505,99,+++++,+++,14417,99,60389us,21026us,1627ms,382ms,517ms,223ms,166ms,720us,6047us,122ms,177us,4998us
+Version  1.97       ------Sequential Output------ --Sequential Input- --Random-
+Concurrency   1     -Per Chr- --Block-- -Rewrite- -Per Chr- --Block-- --Seeks--
+Machine        Size K/sec %CP K/sec %CP K/sec %CP K/sec %CP K/sec %CP  /sec %CP
+dl380_4.4_c 32G   131  99 129288  36 63658  13   412  95 187251  13 375.8  25
+Latency             84861us   17395us    1374ms     350ms     869ms     304ms
+Version  1.97       ------Sequential Create------ --------Random Create--------
+dl380_4.4_c -Create-- --Read--- -Delete-- -Create-- --Read--- -Delete--
+              files  /sec %CP  /sec %CP  /sec %CP  /sec %CP  /sec %CP  /sec %CP
+                128 16115  99 +++++ +++ 17345  99 17184  99 +++++ +++ 14396  99
+Latency               163ms     421us     777us   88193us     195us    1024us
+1.97,1.97,dl380_4.4_c,1,1452968906,32G,,131,99,129288,36,63658,13,412,95,187251,13,375.8,25,128,,,,,16115,99,+++++,+++,17345,99,17184,99,+++++,+++,14396,99,84861us,17395us,1374ms,350ms,869ms,304ms,163ms,421us,777us,88193us,195us,1024us

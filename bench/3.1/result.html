@@ -38,7 +38,7 @@ back to Index
 <kbd>echo "init " && date</kbd>
 <br />
 <samp><pre>init 
-So 3. Jan 20:47:06 CET 2016
+Sa 16. Jan 19:20:08 CET 2016
 </pre></samp>
 </p>
 <a class="anchor" aria-hidden="true" id="3.1_pool_setup"></a> <h2><small><a href="#3.1_pool_setup">#</a></small>Pool Setup</h2>
@@ -80,6 +80,185 @@ tank  3,62T   448K  3,62T         -     0%     0%  1.00x  ONLINE  -
 tank   314K  2,55T   140K  /tank
 </pre></samp>
 </p>
+<a class="anchor" aria-hidden="true" id="3.1_boonie"></a> <h2><small><a href="#3.1_boonie">#</a></small>Boonie</h2>
+<p class="cmd">
+<kbd>echo "start " && date</kbd>
+<br />
+<samp><pre>start 
+Sa 16. Jan 19:20:09 CET 2016
+</pre></samp>
+</p>
+<p class="cmd">
+<kbd>(top -b -n 1 | head -n 20) </kbd>
+<br />
+<samp><pre>top - 19:20:09 up  5:02,  0 users,  load average: 1,92, 2,11, 2,00
+Aufgaben: 726 total,   2 running, 724 sleeping,   0 stopped,   0 zombie
+%Cpu(s):  0,0 be,  3,0 sy,  0,0 ni, 90,5 un,  6,5 wa,  0,0 hi,  0,0 si,  0,0 st
+KiB Mem:   8163284 total,   921976 used,  7241308 free,    25880 buffers
+KiB Swap:   286716 total,        0 used,   286716 free.   122976 cached Mem
+
+  PID BENUTZER  PR  NI    VIRT    RES    SHR S  %CPU %MEM     TIME+ COMMAND
+ 2816 root      20   0   19876   2408   1896 S   6,0  0,0   0:00.29 upstart-ud+
+10145 root      20   0   26904   3388   2540 R   6,0  0,0   0:00.02 top
+    1 root      20   0   33640   4100   2628 S   0,0  0,1   0:02.81 init
+    2 root      20   0       0      0      0 S   0,0  0,0   0:00.09 kthreadd
+    3 root      20   0       0      0      0 S   0,0  0,0   0:00.52 ksoftirqd/0
+    4 root      20   0       0      0      0 S   0,0  0,0   0:00.00 kworker/0:0
+    5 root       0 -20       0      0      0 S   0,0  0,0   0:00.00 kworker/0:+
+    6 root      20   0       0      0      0 S   0,0  0,0   0:00.00 kworker/u6+
+    8 root      20   0       0      0      0 R   0,0  0,0   0:02.05 rcu_sched
+    9 root      20   0       0      0      0 S   0,0  0,0   0:00.68 rcuos/0
+   10 root      20   0       0      0      0 S   0,0  0,0   0:00.33 rcuos/1
+   11 root      20   0       0      0      0 S   0,0  0,0   0:00.32 rcuos/2
+   12 root      20   0       0      0      0 S   0,0  0,0   0:00.22 rcuos/3
+</pre></samp>
+</p>
+<p class="cmd">
+<kbd>/usr/sbin/bonnie++ -q -d /tank -r 16384 -u root -n 128 -m "dl380
+ 3.1" >> bench/boonie.csv</kbd>
+<br />
+<p class="cmd">
+<kbd>(top -b -n 1 | head -n 20) </kbd>
+<br />
+<samp><pre>top - 19:33:16 up  5:15,  0 users,  load average: 3,82, 2,28, 2,00
+Aufgaben: 719 total,   2 running, 717 sleeping,   0 stopped,   0 zombie
+%Cpu(s):  0,0 be,  3,1 sy,  0,0 ni, 90,4 un,  6,5 wa,  0,0 hi,  0,0 si,  0,0 st
+KiB Mem:   8163284 total,  1252600 used,  6910684 free,    25904 buffers
+KiB Swap:   286716 total,        0 used,   286716 free.   122896 cached Mem
+
+  PID BENUTZER  PR  NI    VIRT    RES    SHR S  %CPU %MEM     TIME+ COMMAND
+   13 root      20   0       0      0      0 S   6,1  0,0   0:00.26 rcuos/4
+10157 root      20   0   26904   3460   2612 R   6,1  0,0   0:00.02 top
+    1 root      20   0   33640   4100   2628 S   0,0  0,1   0:02.81 init
+    2 root      20   0       0      0      0 S   0,0  0,0   0:00.09 kthreadd
+    3 root      20   0       0      0      0 S   0,0  0,0   0:00.55 ksoftirqd/0
+    4 root      20   0       0      0      0 S   0,0  0,0   0:00.00 kworker/0:0
+    5 root       0 -20       0      0      0 S   0,0  0,0   0:00.00 kworker/0:+
+    6 root      20   0       0      0      0 S   0,0  0,0   0:00.00 kworker/u6+
+    8 root      20   0       0      0      0 R   0,0  0,0   0:02.15 rcu_sched
+    9 root      20   0       0      0      0 S   0,0  0,0   0:00.68 rcuos/0
+   10 root      20   0       0      0      0 S   0,0  0,0   0:00.33 rcuos/1
+   11 root      20   0       0      0      0 S   0,0  0,0   0:00.32 rcuos/2
+   12 root      20   0       0      0      0 S   0,0  0,0   0:00.22 rcuos/3
+</pre></samp>
+</p>
+<p class="cmd">
+<kbd>echo "end " && date</kbd>
+<br />
+<samp><pre>end 
+Sa 16. Jan 19:33:16 CET 2016
+</pre></samp>
+</p>
+<a class="anchor" aria-hidden="true" id="3.1_dd"></a> <h2><small><a href="#3.1_dd">#</a></small>DD</h2>
+<p class="cmd">
+<kbd>echo "start " && date</kbd>
+<br />
+<samp><pre>start 
+Sa 16. Jan 19:33:16 CET 2016
+</pre></samp>
+</p>
+<p class="cmd">
+<kbd>(top -b -n 1 | head -n 20) </kbd>
+<br />
+<samp><pre>top - 19:33:16 up  5:15,  0 users,  load average: 3,82, 2,28, 2,00
+Aufgaben: 719 total,   1 running, 718 sleeping,   0 stopped,   0 zombie
+%Cpu(s):  0,0 be,  3,1 sy,  0,0 ni, 90,4 un,  6,5 wa,  0,0 hi,  0,0 si,  0,0 st
+KiB Mem:   8163284 total,  1253336 used,  6909948 free,    25904 buffers
+KiB Swap:   286716 total,        0 used,   286716 free.   122896 cached Mem
+
+  PID BENUTZER  PR  NI    VIRT    RES    SHR S  %CPU %MEM     TIME+ COMMAND
+10165 root      20   0   26904   3540   2692 R  12,0  0,0   0:00.03 top
+    1 root      20   0   33640   4100   2628 S   0,0  0,1   0:02.81 init
+    2 root      20   0       0      0      0 S   0,0  0,0   0:00.09 kthreadd
+    3 root      20   0       0      0      0 S   0,0  0,0   0:00.55 ksoftirqd/0
+    4 root      20   0       0      0      0 S   0,0  0,0   0:00.00 kworker/0:0
+    5 root       0 -20       0      0      0 S   0,0  0,0   0:00.00 kworker/0:+
+    6 root      20   0       0      0      0 S   0,0  0,0   0:00.00 kworker/u6+
+    8 root      20   0       0      0      0 S   0,0  0,0   0:02.15 rcu_sched
+    9 root      20   0       0      0      0 S   0,0  0,0   0:00.68 rcuos/0
+   10 root      20   0       0      0      0 S   0,0  0,0   0:00.33 rcuos/1
+   11 root      20   0       0      0      0 S   0,0  0,0   0:00.32 rcuos/2
+   12 root      20   0       0      0      0 S   0,0  0,0   0:00.22 rcuos/3
+   13 root      20   0       0      0      0 S   0,0  0,0   0:00.26 rcuos/4
+</pre></samp>
+</p>
+<p class="cmd">
+<kbd>(time sh -c "dd if=/dev/zero of=/tank/tmp bs=4k count=4194304 && sync") </kbd>
+<br />
+<samp><pre>4194304+0 Datensätze ein
+4194304+0 Datensätze aus
+17179869184 Bytes (17 GB) kopiert, 96,2787 s, 178 MB/s
+1.38user 62.46system 1:42.32elapsed 62%CPU (0avgtext+0avgdata 2208maxresident)k
+0inputs+33554432outputs (0major+293minor)pagefaults 0swaps
+</pre></samp>
+</p>
+<p class="cmd">
+<kbd>(top -b -n 1 | head -n 20) </kbd>
+<br />
+<samp><pre>top - 19:34:59 up  5:17,  0 users,  load average: 3,71, 2,57, 2,12
+Aufgaben: 719 total,   2 running, 717 sleeping,   0 stopped,   0 zombie
+%Cpu(s):  0,0 be,  3,2 sy,  0,0 ni, 90,3 un,  6,5 wa,  0,0 hi,  0,0 si,  0,0 st
+KiB Mem:   8163284 total,  5252564 used,  2910720 free,    25916 buffers
+KiB Swap:   286716 total,        0 used,   286716 free.   122896 cached Mem
+
+  PID BENUTZER  PR  NI    VIRT    RES    SHR S  %CPU %MEM     TIME+ COMMAND
+10174 root      20   0   26904   3404   2556 R  11,9  0,0   0:00.03 top
+ 9932 root       0 -20       0      0      0 S   5,9  0,0   0:02.93 z_wr_int_4
+ 9943 root       0 -20       0      0      0 S   5,9  0,0   0:02.94 z_wr_int_5
+ 9959 root       0 -20       0      0      0 S   5,9  0,0   0:02.88 z_wr_int_6
+ 9962 root       0 -20       0      0      0 S   5,9  0,0   0:02.92 z_wr_int_6
+    1 root      20   0   33640   4100   2628 S   0,0  0,1   0:02.81 init
+    2 root      20   0       0      0      0 S   0,0  0,0   0:00.09 kthreadd
+    3 root      20   0       0      0      0 S   0,0  0,0   0:00.56 ksoftirqd/0
+    4 root      20   0       0      0      0 S   0,0  0,0   0:00.00 kworker/0:0
+    5 root       0 -20       0      0      0 S   0,0  0,0   0:00.00 kworker/0:+
+    6 root      20   0       0      0      0 S   0,0  0,0   0:00.00 kworker/u6+
+    8 root      20   0       0      0      0 S   0,0  0,0   0:02.16 rcu_sched
+    9 root      20   0       0      0      0 S   0,0  0,0   0:00.68 rcuos/0
+</pre></samp>
+</p>
+<p class="cmd">
+<kbd>(time sh -c "dd if=/tank/tmp of=/dev/null bs=4k") </kbd>
+<br />
+<samp><pre>4194304+0 Datensätze ein
+4194304+0 Datensätze aus
+17179869184 Bytes (17 GB) kopiert, 67,7584 s, 254 MB/s
+0.85user 17.40system 1:07.76elapsed 26%CPU (0avgtext+0avgdata 2348maxresident)k
+33967984inputs+0outputs (0major+222minor)pagefaults 0swaps
+</pre></samp>
+</p>
+<p class="cmd">
+<kbd>(top -b -n 1 | head -n 20) </kbd>
+<br />
+<samp><pre>top - 19:36:06 up  5:18,  0 users,  load average: 1,95, 2,27, 2,05
+Aufgaben: 719 total,   2 running, 717 sleeping,   0 stopped,   0 zombie
+%Cpu(s):  0,0 be,  3,2 sy,  0,0 ni, 90,3 un,  6,5 wa,  0,0 hi,  0,0 si,  0,0 st
+KiB Mem:   8163284 total,  5081404 used,  3081880 free,    25932 buffers
+KiB Swap:   286716 total,        0 used,   286716 free.   122900 cached Mem
+
+  PID BENUTZER  PR  NI    VIRT    RES    SHR S  %CPU %MEM     TIME+ COMMAND
+10182 root      20   0   26904   3396   2544 R   6,0  0,0   0:00.02 top
+    1 root      20   0   33640   4100   2628 S   0,0  0,1   0:02.81 init
+    2 root      20   0       0      0      0 S   0,0  0,0   0:00.09 kthreadd
+    3 root      20   0       0      0      0 S   0,0  0,0   0:00.56 ksoftirqd/0
+    4 root      20   0       0      0      0 S   0,0  0,0   0:00.00 kworker/0:0
+    5 root       0 -20       0      0      0 S   0,0  0,0   0:00.00 kworker/0:+
+    6 root      20   0       0      0      0 S   0,0  0,0   0:00.00 kworker/u6+
+    8 root      20   0       0      0      0 R   0,0  0,0   0:02.17 rcu_sched
+    9 root      20   0       0      0      0 S   0,0  0,0   0:00.68 rcuos/0
+   10 root      20   0       0      0      0 S   0,0  0,0   0:00.33 rcuos/1
+   11 root      20   0       0      0      0 S   0,0  0,0   0:00.32 rcuos/2
+   12 root      20   0       0      0      0 S   0,0  0,0   0:00.22 rcuos/3
+   13 root      20   0       0      0      0 S   0,0  0,0   0:00.26 rcuos/4
+</pre></samp>
+</p>
+<p class="cmd">
+<kbd>echo "end " && date</kbd>
+<br />
+<samp><pre>end 
+Sa 16. Jan 19:36:06 CET 2016
+</pre></samp>
+</p>
 <a class="anchor" aria-hidden="true" id="3.1_cleanup"></a> <h2><small><a href="#3.1_cleanup">#</a></small>Cleanup</h2>
 <p class="cmd">
 <kbd>/sbin/zpool destroy -f tank</kbd>
@@ -90,7 +269,7 @@ tank   314K  2,55T   140K  /tank
 <kbd>echo "done " && date</kbd>
 <br />
 <samp><pre>done 
-So 3. Jan 20:47:07 CET 2016
+Sa 16. Jan 19:36:07 CET 2016
 </pre></samp>
 </p>
 </div>
