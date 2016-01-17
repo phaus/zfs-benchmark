@@ -325,7 +325,7 @@ function addStyles($file) {
 	fwrite($file, "a.anchor { margin-top:60px; top: -60px; position: relative; visibility: hidden;}"); 
 	fwrite($file, ".center { text-align:center; }"); 
 	// styles for Boonie
-	fwrite($file, "td.header {text-align: center; backgroundcolor: \"#CCFFFF\" }td.rowheader {text-align: center; backgroundcolor: \"#CCCFFF\" }td.size {text-align: center; backgroundcolor: \"#CCCFFF\" }td.ksec {text-align: center; fontstyle: italic }");
+	fwrite($file, "td.header {text-align: center; backgroundcolor: \"#CCFFFF\" }td.rowheader {text-align: left; backgroundcolor: \"#CCCFFF\" }td.size {text-align: center; backgroundcolor: \"#CCCFFF\" }td.ksec {text-align: center; fontstyle: italic }td{padding-left:10px; padding-right: 10px}");
 	fwrite($file, "</style>\n");
 }
 
